@@ -1,0 +1,235 @@
+/* ==========================================================================
+   THEME: BASE AND COLOR TOKENS (LIGHT THEME DEFAULT)
+   ========================================================================== */
+
+:root,
+[data-theme="light"] {
+   /* ------------------------------------------------------------------------
+     1. PRIMITIVE TOKENS (100 - 900)
+     ------------------------------------------------------------------------ */
+
+   --scale-blue-100: #e0f8fd;
+   --scale-blue-200: #b8f0fa;
+   --scale-blue-300: #7ee3f6;
+   --scale-blue-400: #36d1ee;
+   --scale-blue-500: #00B5D9;
+   --scale-blue-600: #0093b5;
+   --scale-blue-700: #047593;
+   --scale-blue-800: #0c5e75;
+   --scale-blue-900: #0f4f63;
+
+   --scale-dark-blue-100: #e2f1fc;
+   --scale-dark-blue-200: #bedff9;
+   --scale-dark-blue-300: #84c2f4;
+   --scale-dark-blue-400: #429fec;
+   --scale-dark-blue-500: #1480db;
+   --scale-dark-blue-600: #005F96;
+   --scale-dark-blue-700: #014c7a;
+   --scale-dark-blue-800: #054166;
+   --scale-dark-blue-900: #0a3755;
+
+   --scale-orange-100: #fef7dc;
+   --scale-orange-200: #fcedad;
+   --scale-orange-300: #f9dc6e;
+   --scale-orange-400: #f5c832;
+   --scale-orange-500: #EDB512;
+   --scale-orange-600: #cf930b;
+   --scale-orange-700: #a56b0d;
+   --scale-orange-800: #865312;
+   --scale-orange-900: #714414;
+
+   --scale-green-100: #f2fbde;
+   --scale-green-200: #e2f7b4;
+   --scale-green-300: #cbf07c;
+   --scale-green-400: #aee43b;
+   --scale-green-500: #8FD400;
+   --scale-green-600: #6fa900;
+   --scale-green-700: #548004;
+   --scale-green-800: #43650a;
+   --scale-green-900: #39550d;
+
+   --scale-red-100: #fee2e2;
+   --scale-red-200: #fecaca;
+   --scale-red-300: #fca5a5;
+   --scale-red-400: #f87171;
+   --scale-red-500: #ef4444;
+   --scale-red-600: #dc2626;
+   --scale-red-700: #b91c1c;
+   --scale-red-800: #991b1b;
+   --scale-red-900: #7f1d1d;
+
+   --scale-emerald-100: #d1fae5;
+   --scale-emerald-200: #a7f3d0;
+   --scale-emerald-300: #6ee7b7;
+   --scale-emerald-400: #34d399;
+   --scale-emerald-500: #10b981;
+   --scale-emerald-600: #059669;
+   --scale-emerald-700: #047857;
+   --scale-emerald-800: #065f46;
+   --scale-emerald-900: #064e3b;
+
+   --scale-amber-100: #fef3c7;
+   --scale-amber-200: #fde68a;
+   --scale-amber-300: #fcd34d;
+   --scale-amber-400: #fbbf24;
+   --scale-amber-500: #f59e0b;
+   --scale-amber-600: #d97706;
+   --scale-amber-700: #b45309;
+   --scale-amber-800: #92400e;
+   --scale-amber-900: #78350f;
+
+   --scale-gray-100: #f1f5f9;
+   --scale-gray-200: #e2e8f0;
+   --scale-gray-300: #cbd5e1;
+   --scale-gray-400: #94a3b8;
+   --scale-gray-500: #64748b;
+   --scale-gray-600: #475569;
+   --scale-gray-700: #334155;
+   --scale-gray-800: #1e293b;
+   --scale-gray-900: #0f172a;
+
+   /* ------------------------------------------------------------------------
+     2. SEMANTIC TOKENS (DEFAULT - LIGHT THEME)
+     ------------------------------------------------------------------------ */
+
+   --color-primary-100: var(--scale-blue-100);
+   --color-primary-200: var(--scale-blue-200);
+   --color-primary-300: var(--scale-blue-300);
+   --color-primary-400: var(--scale-blue-400);
+   --color-primary-500: var(--scale-blue-500);
+   --color-primary-600: var(--scale-blue-600);
+   --color-primary-700: var(--scale-blue-700);
+   --color-primary-800: var(--scale-blue-800);
+   --color-primary-900: var(--scale-blue-900);
+
+   --color-secondary-100: var(--scale-dark-blue-100);
+   --color-secondary-200: var(--scale-dark-blue-200);
+   --color-secondary-300: var(--scale-dark-blue-300);
+   --color-secondary-400: var(--scale-dark-blue-400);
+   --color-secondary-500: var(--scale-dark-blue-500);
+   --color-secondary-600: var(--scale-dark-blue-600);
+   --color-secondary-700: var(--scale-dark-blue-700);
+   --color-secondary-800: var(--scale-dark-blue-800);
+   --color-secondary-900: var(--scale-dark-blue-900);
+
+   --color-accent-orange-100: var(--scale-orange-100);
+   --color-accent-orange-500: var(--scale-orange-500);
+   --color-accent-orange-700: var(--scale-orange-700);
+
+   --color-accent-green-100: var(--scale-green-100);
+   --color-accent-green-500: var(--scale-green-500);
+   --color-accent-green-700: var(--scale-green-700);
+
+   --color-danger-100: var(--scale-red-100);
+   --color-danger-500: var(--scale-red-500);
+   --color-danger-600: var(--scale-red-600);
+   --color-danger-700: var(--scale-red-700);
+
+   --color-success-100: var(--scale-emerald-100);
+   --color-success-500: var(--scale-emerald-500);
+   --color-success-600: var(--scale-emerald-600);
+   --color-success-700: var(--scale-emerald-700);
+
+   --color-warning-100: var(--scale-amber-100);
+   --color-warning-500: var(--scale-amber-500);
+   --color-warning-600: var(--scale-amber-600);
+   --color-warning-700: var(--scale-amber-700);
+
+   --color-info-100: var(--scale-blue-100);
+   --color-info-500: var(--scale-blue-500);
+   --color-info-600: var(--scale-blue-600);
+   --color-info-700: var(--scale-blue-700);
+
+   /* ------------------------------------------------------------------------
+     3. TEXT AND SURFACE TOKENS (LIGHT THEME)
+     ------------------------------------------------------------------------ */
+   --bg-app: #f8fafc;
+   --bg-surface: #ffffff;
+   --bg-surface-elevated: #ffffff;
+   --bg-muted: var(--scale-gray-100);
+
+   --text-primary: var(--scale-gray-900);
+   --text-secondary: var(--scale-gray-600);
+   --text-muted: var(--scale-gray-400);
+   --text-inverse: #ffffff;
+
+   --border-subtle: var(--scale-gray-200);
+   --border-strong: var(--scale-gray-300);
+   --border-focus: var(--color-primary-500);
+
+   /* ------------------------------------------------------------------------
+     4. CONTAINERS (Breakpoints y Max-Width)
+     ------------------------------------------------------------------------ */
+   --container-xs: 380px;
+   --container-sm: 540px;
+   --container-md: 768px;
+   --container-lg: 1024px;
+   --container-xl: 1280px;
+}
+
+/* ==========================================================================
+   DARK THEME ([data-theme="dark"])
+   ========================================================================== */
+[data-theme="dark"] {
+   --color-primary-100: var(--scale-blue-900);
+   --color-primary-200: var(--scale-blue-800);
+   --color-primary-300: var(--scale-blue-600);
+   --color-primary-400: var(--scale-blue-500);
+   --color-primary-500: var(--scale-blue-400);
+   --color-primary-600: var(--scale-blue-300);
+   --color-primary-700: var(--scale-blue-200);
+   --color-primary-800: var(--scale-blue-100);
+   --color-primary-900: #ffffff;
+
+   --color-secondary-100: var(--scale-dark-blue-900);
+   --color-secondary-200: var(--scale-dark-blue-800);
+   --color-secondary-300: var(--scale-dark-blue-700);
+   --color-secondary-400: var(--scale-dark-blue-500);
+   --color-secondary-500: var(--scale-dark-blue-400);
+   --color-secondary-600: var(--scale-dark-blue-300);
+   --color-secondary-700: var(--scale-dark-blue-200);
+   --color-secondary-800: var(--scale-dark-blue-100);
+   --color-secondary-900: #ffffff;
+
+   --color-accent-orange-100: var(--scale-orange-900);
+   --color-accent-orange-500: var(--scale-orange-400);
+   --color-accent-orange-700: var(--scale-orange-300);
+
+   --color-accent-green-100: var(--scale-green-900);
+   --color-accent-green-500: var(--scale-green-400);
+   --color-accent-green-700: var(--scale-green-300);
+
+   --color-danger-100: var(--scale-red-900);
+   --color-danger-500: var(--scale-red-400);
+   --color-danger-600: var(--scale-red-300);
+   --color-danger-700: var(--scale-red-200);
+
+   --color-success-100: var(--scale-emerald-900);
+   --color-success-500: var(--scale-emerald-400);
+   --color-success-600: var(--scale-emerald-300);
+   --color-success-700: var(--scale-emerald-200);
+
+   --color-warning-100: var(--scale-amber-900);
+   --color-warning-500: var(--scale-amber-400);
+   --color-warning-600: var(--scale-amber-300);
+   --color-warning-700: var(--scale-amber-200);
+
+   --color-info-100: var(--scale-blue-900);
+   --color-info-500: var(--scale-blue-400);
+   --color-info-600: var(--scale-blue-300);
+   --color-info-700: var(--scale-blue-200);
+
+   --bg-app: #0b1120;
+   --bg-surface: #1e293b;
+   --bg-surface-elevated: #334155;
+   --bg-muted: var(--scale-gray-800);
+
+   --text-primary: #f8fafc;
+   --text-secondary: #cbd5e1;
+   --text-muted: #64748b;
+   --text-inverse: #0f172a;
+
+   --border-subtle: #334155;
+   --border-strong: var(--scale-gray-500);
+   --border-focus: var(--color-primary-500);
+}

@@ -1,0 +1,71 @@
+:root {
+   /* ------------------------------------------------------------------------
+     1. RADIUS SCALES (Border Radius)
+     ------------------------------------------------------------------------ */
+   --radius-none: 0px;
+   --radius-xs: 4px;
+   /* Badges, tags, tooltips */
+   --radius-sm: 6px;
+   /* Inputs, small buttons, checkboxes */
+   --radius-md: 10px;
+   /* Medium buttons, TextFields, Selects (Default) */
+   --radius-lg: 16px;
+   /* Cards, Panels, Medium modals */
+   --radius-xl: 24px;
+   /* Large modals, High drawers, Hero cards */
+   --radius-full: 9999px;
+   /* Pills, Rounded badges, Rounded avatars */
+
+   /* ------------------------------------------------------------------------
+     2. BORDERS SCALE (Border Widths)
+     ------------------------------------------------------------------------ */
+   --border-width-none: 0px;
+   --border-width-thin: 1px;
+   /* Light borders for cards and inputs */
+   --border-width-medium: 2px;
+   /* Focused inputs */
+   --border-width-thick: 4px;
+   /* Side status indicators on cards/tabs */
+
+   /* Default border styles */
+   --border-style-solid: solid;
+   --border-style-dashed: dashed;
+   --border-style-dotted: dotted;
+
+   /* ------------------------------------------------------------------------
+     3. SHADOW SCALE (Box Shadows)
+     ------------------------------------------------------------------------ */
+   /* Plain shadow for low contrast elements (Secondary inputs/buttons) */
+   --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+
+   /* Soft shadow for cards and dropdowns */
+   --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.08),
+      0 1px 2px -1px rgba(15, 23, 42, 0.08);
+
+   /* Regular shadow for Popovers, Menus, DatePickers (Default) */
+   --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08),
+      0 2px 4px -2px rgba(15, 23, 42, 0.06);
+
+   /* Hard shadow for Drawers and Modals */
+   --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08),
+      0 4px 6px -4px rgba(15, 23, 42, 0.04);
+
+   /* Max hard shadow for full-screen Overlays */
+   --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.10),
+      0 8px 10px -6px rgba(15, 23, 42, 0.04);
+
+   /* Focus Ring (WCAG) */
+   --shadow-focus: 0 0 0 3px rgba(0, 181, 217, 0.25);
+}
+
+/* ==========================================================================
+   DARK THEME ([data-theme="dark"])
+   ========================================================================== */
+[data-theme="dark"] {
+   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.12);
+   --shadow-focus: 0 0 0 3px rgba(54, 209, 238, 0.35);
+}

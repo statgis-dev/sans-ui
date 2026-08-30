@@ -1,0 +1,5 @@
+.container { width: 100%; margin-inline: auto; box-sizing: border-box; }
+.sizeXs { max-width: 540px; } .sizeSm { max-width: 720px; } .sizeMd { max-width: 960px; }
+.sizeLg { max-width: 1140px; } .sizeXl { max-width: 1320px; } .sizeFluid { max-width: 100%; }
+.padNone { padding-inline: 0; } .padXs { padding-inline: 4px; } .padSm { padding-inline: 8px; }
+.padMd { padding-inline: 16px; } .padLg { padding-inline: 24px; } .padXl { padding-inline: 32px; } .pad2Xl { padding-inline: 48px; }

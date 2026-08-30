@@ -1,0 +1,32 @@
+.text { margin: 0; padding: 0; font-family: var(--font-sans); line-height: var(--line-height-body); color: inherit; }
+.variantRegular { font-family: var(--font-sans); }
+.variantMono { font-family: var(--font-mono); }
+.variantDisplay { font-family: var(--font-display); }
+.sizeXs { font-size: var(--font-size-xs); }
+.sizeSm { font-size: var(--font-size-sm); }
+.sizeMd { font-size: var(--font-size-md); }
+.sizeLg { font-size: var(--font-size-lg); }
+.sizeXl { font-size: var(--font-size-xl); }
+.weight400 { font-weight: var(--font-weight-regular); }
+.weight500 { font-weight: var(--font-weight-medium); }
+.weight600 { font-weight: var(--font-weight-semibold); }
+.weight700 { font-weight: var(--font-weight-bold); }
+.italic { font-style: italic; }
+.underline { text-decoration: underline; }
+.strikethrough { text-decoration: line-through; }
+.underline.strikethrough { text-decoration: underline line-through; }
+.colorInherit { color: inherit; }
+.colorDimmed { color: var(--text-muted); }
+.colorPrimary { color: var(--color-primary-500); }
+.colorSecondary { color: var(--color-secondary-500); }
+.colorNeutral { color: var(--text-primary); }
+.colorSuccess { color: var(--color-success-500); }
+.colorWarning { color: var(--color-warning-500); }
+.colorDanger { color: var(--color-danger-500); }
+.colorInfo { color: var(--color-info-500); }
+.alignLeft { text-align: left; }
+.alignCenter { text-align: center; }
+.alignRight { text-align: right; }
+.alignJustify { text-align: justify; }
+.truncateSingle { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.truncateClamp { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }

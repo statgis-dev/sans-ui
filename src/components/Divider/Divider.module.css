@@ -1,0 +1,19 @@
+.divider { border: none; margin: 0; padding: 0; display: flex; align-items: center; box-sizing: border-box; }
+.horizontal { width: 100%; flex-direction: row; }
+.vertical { height: 100%; min-height: 1rem; flex-direction: column; display: inline-flex; vertical-align: middle; }
+.line { flex-grow: 1; }
+.horizontal .line {
+  border-bottom-width: var(--divider-size, 1px);
+  border-bottom-style: var(--divider-style, solid);
+  border-bottom-color: var(--divider-color, var(--border-subtle));
+}
+.vertical .line {
+  border-left-width: var(--divider-size, 1px);
+  border-left-style: var(--divider-style, solid);
+  border-left-color: var(--divider-color, var(--border-subtle));
+}
+.label {
+  padding-left: 0.75rem; padding-right: 0.75rem;
+  font-size: var(--font-size-xs); color: var(--text-muted);
+  white-space: nowrap; font-family: var(--font-sans);
+}

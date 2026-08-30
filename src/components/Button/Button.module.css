@@ -1,0 +1,96 @@
+.button {
+  display: inline-flex; align-items: center; justify-content: center; position: relative;
+  box-sizing: border-box; user-select: none; font-family: var(--font-sans);
+  font-weight: var(--font-weight-semibold); line-height: var(--line-height-none);
+  text-decoration: none; border: 1px solid transparent; cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  white-space: nowrap;
+}
+.button:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.button:disabled, .button.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.fullWidth { width: 100%; }
+
+.sizeXs { height: 28px; padding-inline: 10px; font-size: var(--font-size-xs); gap: 6px; }
+.sizeSm { height: 32px; padding-inline: 12px; font-size: var(--font-size-sm); gap: 6px; }
+.sizeMd { height: 38px; padding-inline: 16px; font-size: var(--font-size-md); gap: 8px; }
+.sizeLg { height: 44px; padding-inline: 20px; font-size: var(--font-size-lg); gap: 10px; }
+.sizeXl { height: 52px; padding-inline: 26px; font-size: var(--font-size-xl); gap: 12px; }
+
+.radiusNone { border-radius: var(--radius-none); } .radiusXs { border-radius: var(--radius-xs); }
+.radiusSm { border-radius: var(--radius-sm); } .radiusMd { border-radius: var(--radius-md); }
+.radiusLg { border-radius: var(--radius-lg); } .radiusXl { border-radius: var(--radius-xl); }
+.radiusFull { border-radius: var(--radius-full); }
+
+.filledPrimary { background-color: var(--color-primary-500); color: #fff; }
+.filledPrimary:hover:not(:disabled) { background-color: var(--color-primary-600); }
+.lightPrimary { background-color: var(--color-primary-100); color: var(--color-primary-700); }
+.lightPrimary:hover:not(:disabled) { background-color: var(--color-primary-200); }
+.outlinePrimary { background-color: transparent; border-color: var(--color-primary-500); color: var(--color-primary-500); }
+.outlinePrimary:hover:not(:disabled) { background-color: var(--color-primary-100); }
+.subtlePrimary { background-color: transparent; color: var(--color-primary-500); }
+.subtlePrimary:hover:not(:disabled) { background-color: var(--color-primary-100); }
+.linkPrimary { background-color: transparent; color: var(--color-primary-500); text-decoration: underline; padding-inline: 0; height: auto; }
+
+.filledSecondary { background-color: var(--color-secondary-600); color: #fff; }
+.filledSecondary:hover:not(:disabled) { background-color: var(--color-secondary-700); }
+.lightSecondary { background-color: var(--color-secondary-100); color: var(--color-secondary-700); }
+.lightSecondary:hover:not(:disabled) { background-color: var(--color-secondary-200); }
+.outlineSecondary { background-color: transparent; border-color: var(--color-secondary-600); color: var(--color-secondary-600); }
+.outlineSecondary:hover:not(:disabled) { background-color: var(--color-secondary-100); }
+.subtleSecondary { background-color: transparent; color: var(--color-secondary-600); }
+.subtleSecondary:hover:not(:disabled) { background-color: var(--color-secondary-100); }
+.linkSecondary { background-color: transparent; color: var(--color-secondary-600); text-decoration: underline; padding-inline: 0; height: auto; }
+
+.filledNeutral { background-color: var(--scale-gray-700); color: #fff; }
+.filledNeutral:hover:not(:disabled) { background-color: var(--scale-gray-800); }
+.lightNeutral { background-color: var(--bg-muted); color: var(--text-primary); }
+.lightNeutral:hover:not(:disabled) { background-color: var(--border-strong); }
+.outlineNeutral { background-color: transparent; border-color: var(--border-strong); color: var(--text-primary); }
+.outlineNeutral:hover:not(:disabled) { background-color: var(--bg-muted); }
+.subtleNeutral { background-color: transparent; color: var(--text-primary); }
+.subtleNeutral:hover:not(:disabled) { background-color: var(--bg-muted); }
+.linkNeutral { background-color: transparent; color: var(--text-primary); text-decoration: underline; padding-inline: 0; height: auto; }
+
+.filledSuccess { background-color: var(--color-success-500); color: #fff; }
+.filledSuccess:hover:not(:disabled) { background-color: var(--color-success-600); }
+.lightSuccess { background-color: var(--color-success-100); color: var(--color-success-700); }
+.lightSuccess:hover:not(:disabled) { background-color: var(--color-success-200); }
+.outlineSuccess { background-color: transparent; border-color: var(--color-success-500); color: var(--color-success-500); }
+.outlineSuccess:hover:not(:disabled) { background-color: var(--color-success-100); }
+.subtleSuccess { background-color: transparent; color: var(--color-success-500); }
+.subtleSuccess:hover:not(:disabled) { background-color: var(--color-success-100); }
+.linkSuccess { background-color: transparent; color: var(--color-success-500); text-decoration: underline; padding-inline: 0; height: auto; }
+
+.filledWarning { background-color: var(--color-warning-500); color: #fff; }
+.filledWarning:hover:not(:disabled) { background-color: var(--color-warning-600); }
+.lightWarning { background-color: var(--color-warning-100); color: var(--color-warning-700); }
+.lightWarning:hover:not(:disabled) { background-color: var(--color-warning-200); }
+.outlineWarning { background-color: transparent; border-color: var(--color-warning-500); color: var(--color-warning-600); }
+.outlineWarning:hover:not(:disabled) { background-color: var(--color-warning-100); }
+.subtleWarning { background-color: transparent; color: var(--color-warning-600); }
+.subtleWarning:hover:not(:disabled) { background-color: var(--color-warning-100); }
+.linkWarning { background-color: transparent; color: var(--color-warning-600); text-decoration: underline; padding-inline: 0; height: auto; }
+
+.filledDanger { background-color: var(--color-danger-500); color: #fff; }
+.filledDanger:hover:not(:disabled) { background-color: var(--color-danger-600); }
+.lightDanger { background-color: var(--color-danger-100); color: var(--color-danger-700); }
+.lightDanger:hover:not(:disabled) { background-color: var(--color-danger-200); }
+.outlineDanger { background-color: transparent; border-color: var(--color-danger-500); color: var(--color-danger-500); }
+.outlineDanger:hover:not(:disabled) { background-color: var(--color-danger-100); }
+.subtleDanger { background-color: transparent; color: var(--color-danger-500); }
+.subtleDanger:hover:not(:disabled) { background-color: var(--color-danger-100); }
+.linkDanger { background-color: transparent; color: var(--color-danger-500); text-decoration: underline; padding-inline: 0; height: auto; }
+
+.filledInfo { background-color: var(--color-info-500); color: #fff; }
+.filledInfo:hover:not(:disabled) { background-color: var(--color-info-600); }
+.lightInfo { background-color: var(--color-info-100); color: var(--color-info-700); }
+.lightInfo:hover:not(:disabled) { background-color: var(--color-info-200); }
+.outlineInfo { background-color: transparent; border-color: var(--color-info-500); color: var(--color-info-500); }
+.outlineInfo:hover:not(:disabled) { background-color: var(--color-info-100); }
+.subtleInfo { background-color: transparent; color: var(--color-info-500); }
+.subtleInfo:hover:not(:disabled) { background-color: var(--color-info-100); }
+.linkInfo { background-color: transparent; color: var(--color-info-500); text-decoration: underline; padding-inline: 0; height: auto; }
+
+.leftSection, .rightSection, .label { display: inline-flex; align-items: center; }
+.spinner { animation: spin 800ms linear infinite; display: inline-block; width: 1em; height: 1em; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }

@@ -1,0 +1,59 @@
+.badge {
+  display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+  font-family: var(--font-sans); font-weight: var(--font-weight-semibold); line-height: 1;
+  text-transform: uppercase; letter-spacing: var(--letter-spacing-wider); white-space: nowrap;
+  user-select: none; border: 1px solid transparent; gap: 6px;
+}
+.sizeXs { height: 18px; font-size: 10px; padding-inline: 6px; }
+.sizeSm { height: 20px; font-size: 11px; padding-inline: 8px; }
+.sizeMd { height: 24px; font-size: 12px; padding-inline: 10px; }
+.sizeLg { height: 28px; font-size: 13px; padding-inline: 12px; }
+.sizeXl { height: 32px; font-size: 14px; padding-inline: 14px; }
+.radiusNone { border-radius: var(--radius-none); } .radiusXs { border-radius: var(--radius-xs); }
+.radiusSm { border-radius: var(--radius-sm); } .radiusMd { border-radius: var(--radius-md); }
+.radiusLg { border-radius: var(--radius-lg); } .radiusXl { border-radius: var(--radius-xl); } .radiusFull { border-radius: var(--radius-full); }
+
+.filledPrimary { background-color: var(--color-primary-500); color: #fff; }
+.lightPrimary { background-color: var(--color-primary-100); color: var(--color-primary-700); }
+.outlinePrimary { background-color: transparent; border-color: var(--color-primary-500); color: var(--color-primary-500); }
+.dotPrimary { background-color: transparent; color: var(--text-primary); border-color: var(--border-subtle); }
+
+.filledSecondary { background-color: var(--color-secondary-600); color: #fff; }
+.lightSecondary { background-color: var(--color-secondary-100); color: var(--color-secondary-700); }
+.outlineSecondary { background-color: transparent; border-color: var(--color-secondary-600); color: var(--color-secondary-600); }
+.dotSecondary { background-color: transparent; color: var(--text-primary); border-color: var(--border-subtle); }
+
+.filledNeutral { background-color: var(--scale-gray-700); color: #fff; }
+.lightNeutral { background-color: var(--bg-muted); color: var(--text-primary); }
+.outlineNeutral { background-color: transparent; border-color: var(--border-strong); color: var(--text-primary); }
+.dotNeutral { background-color: transparent; color: var(--text-primary); border-color: var(--border-subtle); }
+
+.filledSuccess { background-color: var(--color-success-500); color: #fff; }
+.lightSuccess { background-color: var(--color-success-100); color: var(--color-success-700); }
+.outlineSuccess { background-color: transparent; border-color: var(--color-success-500); color: var(--color-success-500); }
+.dotSuccess { background-color: transparent; color: var(--text-primary); border-color: var(--border-subtle); }
+
+.filledWarning { background-color: var(--color-warning-500); color: #fff; }
+.lightWarning { background-color: var(--color-warning-100); color: var(--color-warning-700); }
+.outlineWarning { background-color: transparent; border-color: var(--color-warning-500); color: var(--color-warning-600); }
+.dotWarning { background-color: transparent; color: var(--text-primary); border-color: var(--border-subtle); }
+
+.filledDanger { background-color: var(--color-danger-500); color: #fff; }
+.lightDanger { background-color: var(--color-danger-100); color: var(--color-danger-700); }
+.outlineDanger { background-color: transparent; border-color: var(--color-danger-500); color: var(--color-danger-500); }
+.dotDanger { background-color: transparent; color: var(--text-primary); border-color: var(--border-subtle); }
+
+.filledInfo { background-color: var(--color-info-500); color: #fff; }
+.lightInfo { background-color: var(--color-info-100); color: var(--color-info-700); }
+.outlineInfo { background-color: transparent; border-color: var(--color-info-500); color: var(--color-info-500); }
+.dotInfo { background-color: transparent; color: var(--text-primary); border-color: var(--border-subtle); }
+
+.dotCircle { width: 6px; height: 6px; border-radius: var(--radius-full); }
+.dotCirclePrimary { background-color: var(--color-primary-500); }
+.dotCircleSecondary { background-color: var(--color-secondary-600); }
+.dotCircleNeutral { background-color: var(--scale-gray-500); }
+.dotCircleSuccess { background-color: var(--color-success-500); }
+.dotCircleWarning { background-color: var(--color-warning-500); }
+.dotCircleDanger { background-color: var(--color-danger-500); }
+.dotCircleInfo { background-color: var(--color-info-500); }
+.leftSection { display: inline-flex; align-items: center; }

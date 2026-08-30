@@ -1,0 +1,17 @@
+.wrapper { display: inline-flex; position: relative; }
+.tooltip {
+  position: absolute; background-color: var(--scale-gray-900); color: #ffffff; font-family: var(--font-sans);
+  font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); line-height: var(--line-height-tight);
+  padding: 5px 9px; border-radius: var(--radius-xs); white-space: nowrap; box-shadow: var(--shadow-sm);
+  z-index: var(--z-index-tooltip, 700); pointer-events: none; animation: fadeIn 120ms ease-out;
+}
+.posTop { bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%); }
+.posBottom { top: calc(100% + 7px); left: 50%; transform: translateX(-50%); }
+.posLeft { right: calc(100% + 7px); top: 50%; transform: translateY(-50%); }
+.posRight { left: calc(100% + 7px); top: 50%; transform: translateY(-50%); }
+.arrow { position: absolute; width: 0; height: 0; border-style: solid; }
+.posTop .arrow { top: 100%; left: 50%; transform: translateX(-50%); border-width: 5px 5px 0 5px; border-color: var(--scale-gray-900) transparent transparent transparent; }
+.posBottom .arrow { bottom: 100%; left: 50%; transform: translateX(-50%); border-width: 0 5px 5px 5px; border-color: transparent transparent var(--scale-gray-900) transparent; }
+.posLeft .arrow { left: 100%; top: 50%; transform: translateY(-50%); border-width: 5px 0 5px 5px; border-color: transparent transparent transparent var(--scale-gray-900); }
+.posRight .arrow { right: 100%; top: 50%; transform: translateY(-50%); border-width: 5px 5px 5px 0; border-color: transparent var(--scale-gray-900) transparent transparent; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }

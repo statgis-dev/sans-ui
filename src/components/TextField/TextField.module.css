@@ -1,0 +1,23 @@
+.inputContainer { position: relative; display: flex; align-items: center; width: 100%; box-sizing: border-box; }
+.input {
+  width: 100%; box-sizing: border-box; font-family: var(--font-sans); color: var(--text-primary);
+  background-color: var(--bg-surface); border: var(--border-width-thin) var(--border-style-solid) var(--border-strong);
+  border-radius: var(--radius-md); transition: border-color 150ms ease, box-shadow 150ms ease; line-height: 1;
+}
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--border-focus); box-shadow: var(--shadow-focus); }
+.input:disabled { opacity: 0.6; cursor: not-allowed; background-color: var(--bg-muted); }
+.error { border-color: var(--color-danger-500) !important; }
+.error:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important; }
+
+.sizeXs { height: 28px; font-size: var(--font-size-xs); padding-inline: 8px; }
+.sizeSm { height: 32px; font-size: var(--font-size-sm); padding-inline: 10px; }
+.sizeMd { height: 38px; font-size: var(--font-size-md); padding-inline: 12px; }
+.sizeLg { height: 44px; font-size: var(--font-size-lg); padding-inline: 14px; }
+.sizeXl { height: 52px; font-size: var(--font-size-xl); padding-inline: 16px; }
+
+.leftSection { position: absolute; left: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); pointer-events: none; z-index: 1; }
+.rightSection { position: absolute; right: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); z-index: 1; }
+
+.withLeftSection.sizeXs { padding-left: 28px; } .withLeftSection.sizeSm { padding-left: 32px; } .withLeftSection.sizeMd { padding-left: 38px; } .withLeftSection.sizeLg { padding-left: 42px; } .withLeftSection.sizeXl { padding-left: 48px; }
+.withRightSection.sizeXs { padding-right: 28px; } .withRightSection.sizeSm { padding-right: 32px; } .withRightSection.sizeMd { padding-right: 38px; } .withRightSection.sizeLg { padding-right: 42px; } .withRightSection.sizeXl { padding-right: 48px; }

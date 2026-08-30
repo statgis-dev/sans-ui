@@ -1,0 +1,39 @@
+.box { box-sizing: border-box; }
+.centered { margin-inline: auto; }
+.sizeXs { max-width: var(--container-xs); width: 100%; }
+.sizeSm { max-width: var(--container-sm); width: 100%; }
+.sizeMd { max-width: var(--container-md); width: 100%; }
+.sizeLg { max-width: var(--container-lg); width: 100%; }
+.sizeXl { max-width: var(--container-xl); width: 100%; }
+.sizeFull { max-width: 100%; width: 100%; }
+.bgApp { background-color: var(--bg-app); }
+.bgSurface { background-color: var(--bg-surface); }
+.bgElevated { background-color: var(--bg-surface-elevated); }
+.bgPrimary { background-color: var(--color-primary-100); }
+.bgSecondary { background-color: var(--color-secondary-100); }
+.bgNeutral { background-color: var(--bg-muted); }
+.bgSuccess { background-color: var(--color-success-100); }
+.bgWarning { background-color: var(--color-warning-100); }
+.bgDanger { background-color: var(--color-danger-100); }
+.bgInfo { background-color: var(--color-info-100); }
+.padNone { padding: 0; }
+.padXs { padding: 4px; }
+.padSm { padding: 8px; }
+.padMd { padding: 16px; }
+.padLg { padding: 24px; }
+.padXl { padding: 32px; }
+.pad2Xl { padding: 48px; }
+.radiusNone { border-radius: var(--radius-none); }
+.radiusXs { border-radius: var(--radius-xs); }
+.radiusSm { border-radius: var(--radius-sm); }
+.radiusMd { border-radius: var(--radius-md); }
+.radiusLg { border-radius: var(--radius-lg); }
+.radiusXl { border-radius: var(--radius-xl); }
+.radiusFull { border-radius: var(--radius-full); }
+.border { border: var(--border-width-thin) var(--border-style-solid) var(--border-subtle); }
+.shadowNone { box-shadow: none; }
+.shadowXs { box-shadow: var(--shadow-xs); }
+.shadowSm { box-shadow: var(--shadow-sm); }
+.shadowMd { box-shadow: var(--shadow-md); }
+.shadowLg { box-shadow: var(--shadow-lg); }
+.shadowXl { box-shadow: var(--shadow-xl); }

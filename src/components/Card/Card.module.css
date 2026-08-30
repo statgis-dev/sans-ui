@@ -1,0 +1,8 @@
+.card { display: flex; flex-direction: column; background-color: var(--bg-surface); color: var(--text-primary); box-sizing: border-box; position: relative; }
+.withBorder { border: var(--border-width-thin) var(--border-style-solid) var(--border-subtle); }
+.padNone { padding: 0; } .padXs { padding: 4px; } .padSm { padding: 8px; } .padMd { padding: 16px; } .padLg { padding: 24px; } .padXl { padding: 32px; } .pad2Xl { padding: 48px; }
+.radiusNone { border-radius: var(--radius-none); } .radiusXs { border-radius: var(--radius-xs); } .radiusSm { border-radius: var(--radius-sm); } .radiusMd { border-radius: var(--radius-md); } .radiusLg { border-radius: var(--radius-lg); } .radiusXl { border-radius: var(--radius-xl); } .radiusFull { border-radius: var(--radius-full); }
+.shadowNone { box-shadow: none; } .shadowXs { box-shadow: var(--shadow-xs); } .shadowSm { box-shadow: var(--shadow-sm); } .shadowMd { box-shadow: var(--shadow-md); } .shadowLg { box-shadow: var(--shadow-lg); } .shadowXl { box-shadow: var(--shadow-xl); }
+.header { padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; }
+.body { padding: 16px; flex: 1; }
+.footer { padding: 14px 16px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: flex-end; gap: 8px; background-color: var(--bg-muted); }

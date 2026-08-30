@@ -1,0 +1,13 @@
+.wrapper { display: flex; flex-direction: column; box-sizing: border-box; width: 100%; }
+.labelRow { display: flex; align-items: center; margin-bottom: 4px; }
+.label { font-family: var(--font-sans); font-weight: var(--font-weight-medium); color: var(--text-primary); line-height: var(--line-height-tight); user-select: none; }
+.requiredAsterisk { color: var(--color-danger-500); margin-left: 4px; }
+.description { font-family: var(--font-sans); font-size: var(--font-size-xs); color: var(--text-muted); margin-bottom: 6px; line-height: var(--line-height-snug); }
+.inputArea { position: relative; width: 100%; }
+.errorText { font-family: var(--font-sans); font-size: var(--font-size-xs); color: var(--color-danger-500); margin-top: 4px; line-height: var(--line-height-snug); }
+.sizeXs .label { font-size: var(--font-size-xs); }
+.sizeSm .label { font-size: var(--font-size-xs); }
+.sizeMd .label { font-size: var(--font-size-sm); }
+.sizeLg .label { font-size: var(--font-size-md); }
+.sizeXl .label { font-size: var(--font-size-lg); }
+.disabled { opacity: 0.6; cursor: not-allowed; }

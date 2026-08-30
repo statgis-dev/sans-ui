@@ -1,0 +1,6 @@
+.group { display: flex; flex-direction: row; box-sizing: border-box; }
+.gapNone { gap: 0; } .gapXs { gap: 4px; } .gapSm { gap: 8px; } .gapMd { gap: 16px; } .gapLg { gap: 24px; } .gapXl { gap: 32px; } .gap2Xl { gap: 48px; }
+.alignStretch { align-items: stretch; } .alignFlexStart { align-items: flex-start; } .alignCenter { align-items: center; } .alignFlexEnd { align-items: flex-end; }
+.justifyFlexStart { justify-content: flex-start; } .justifyCenter { justify-content: center; } .justifyFlexEnd { justify-content: flex-end; } .justifySpaceBetween { justify-content: space-between; } .justifySpaceAround { justify-content: space-around; }
+.wrapNowrap { flex-wrap: nowrap; } .wrapWrap { flex-wrap: wrap; } .wrapReverse { flex-wrap: wrap-reverse; }
+.grow > * { flex-grow: 1; }

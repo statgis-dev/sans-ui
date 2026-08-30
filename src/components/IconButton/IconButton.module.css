@@ -1,0 +1,44 @@
+.iconButton {
+  display: inline-flex; align-items: center; justify-content: center; position: relative;
+  box-sizing: border-box; padding: 0; border: 1px solid transparent; cursor: pointer; user-select: none;
+  line-height: 1; transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease; flex-shrink: 0;
+}
+.iconButton:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.iconButton:disabled, .iconButton.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.sizeXs { width: 24px; height: 24px; font-size: 14px; }
+.sizeSm { width: 30px; height: 30px; font-size: 16px; }
+.sizeMd { width: 36px; height: 36px; font-size: 18px; }
+.sizeLg { width: 44px; height: 44px; font-size: 22px; }
+.sizeXl { width: 52px; height: 52px; font-size: 26px; }
+.radiusNone { border-radius: var(--radius-none); } .radiusXs { border-radius: var(--radius-xs); }
+.radiusSm { border-radius: var(--radius-sm); } .radiusMd { border-radius: var(--radius-md); }
+.radiusLg { border-radius: var(--radius-lg); } .radiusXl { border-radius: var(--radius-xl); } .radiusFull { border-radius: var(--radius-full); }
+
+.subtleNeutral { background: transparent; color: var(--text-secondary); } .subtleNeutral:hover:not(:disabled) { background: var(--bg-muted); color: var(--text-primary); }
+.filledNeutral { background: var(--scale-gray-700); color: #fff; } .filledNeutral:hover:not(:disabled) { background: var(--scale-gray-800); }
+.lightNeutral { background: var(--bg-muted); color: var(--text-primary); } .lightNeutral:hover:not(:disabled) { background: var(--border-strong); }
+.outlineNeutral { background: transparent; border-color: var(--border-strong); color: var(--text-primary); }
+
+.subtlePrimary { background: transparent; color: var(--color-primary-500); } .subtlePrimary:hover:not(:disabled) { background: var(--color-primary-100); }
+.filledPrimary { background: var(--color-primary-500); color: #fff; } .filledPrimary:hover:not(:disabled) { background: var(--color-primary-600); }
+.lightPrimary { background: var(--color-primary-100); color: var(--color-primary-700); } .lightPrimary:hover:not(:disabled) { background: var(--color-primary-200); }
+.outlinePrimary { background: transparent; border-color: var(--color-primary-500); color: var(--color-primary-500); }
+
+.subtleSecondary { background: transparent; color: var(--color-secondary-600); } .subtleSecondary:hover:not(:disabled) { background: var(--color-secondary-100); }
+.filledSecondary { background: var(--color-secondary-600); color: #fff; } .filledSecondary:hover:not(:disabled) { background: var(--color-secondary-700); }
+.lightSecondary { background: var(--color-secondary-100); color: var(--color-secondary-700); }
+.outlineSecondary { background: transparent; border-color: var(--color-secondary-600); color: var(--color-secondary-600); }
+
+.subtleSuccess { background: transparent; color: var(--color-success-500); } .filledSuccess { background: var(--color-success-500); color: #fff; }
+.lightSuccess { background: var(--color-success-100); color: var(--color-success-700); } .outlineSuccess { background: transparent; border-color: var(--color-success-500); color: var(--color-success-500); }
+
+.subtleWarning { background: transparent; color: var(--color-warning-600); } .filledWarning { background: var(--color-warning-500); color: #fff; }
+.lightWarning { background: var(--color-warning-100); color: var(--color-warning-700); } .outlineWarning { background: transparent; border-color: var(--color-warning-500); color: var(--color-warning-600); }
+
+.subtleDanger { background: transparent; color: var(--color-danger-500); } .filledDanger { background: var(--color-danger-500); color: #fff; }
+.lightDanger { background: var(--color-danger-100); color: var(--color-danger-700); } .outlineDanger { background: transparent; border-color: var(--color-danger-500); color: var(--color-danger-500); }
+
+.subtleInfo { background: transparent; color: var(--color-info-500); } .filledInfo { background: var(--color-info-500); color: #fff; }
+.lightInfo { background: var(--color-info-100); color: var(--color-info-700); } .outlineInfo { background: transparent; border-color: var(--color-info-500); color: var(--color-info-500); }
+
+.spinner { animation: spin 800ms linear infinite; display: inline-block; width: 1em; height: 1em; }

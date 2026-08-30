@@ -1,0 +1,40 @@
+.grid { display: grid; width: 100%; box-sizing: border-box; }
+.gutterNone { gap: 0; } .gutterXs { gap: 4px; } .gutterSm { gap: 8px; } .gutterMd { gap: 16px; } .gutterLg { gap: 24px; } .gutterXl { gap: 32px; } .gutter2Xl { gap: 48px; }
+.col { box-sizing: border-box; min-width: 0; }
+.spanAuto { grid-column: auto; }
+.span1 { grid-column: span 1 / span 1; } .span2 { grid-column: span 2 / span 2; } .span3 { grid-column: span 3 / span 3; }
+.span4 { grid-column: span 4 / span 4; } .span5 { grid-column: span 5 / span 5; } .span6 { grid-column: span 6 / span 6; }
+.span7 { grid-column: span 7 / span 7; } .span8 { grid-column: span 8 / span 8; } .span9 { grid-column: span 9 / span 9; }
+.span10 { grid-column: span 10 / span 10; } .span11 { grid-column: span 11 / span 11; } .span12 { grid-column: span 12 / span 12; }
+.offset1 { grid-column-start: 2; } .offset2 { grid-column-start: 3; } .offset3 { grid-column-start: 4; }
+.offset4 { grid-column-start: 5; } .offset5 { grid-column-start: 6; } .offset6 { grid-column-start: 7; }
+.offset7 { grid-column-start: 8; } .offset8 { grid-column-start: 9; } .offset9 { grid-column-start: 10; }
+.offset10 { grid-column-start: 11; } .offset11 { grid-column-start: 12; }
+@media (min-width: 540px) {
+  .spanSmAuto { grid-column: auto; }
+  .spanSm1 { grid-column: span 1 / span 1; } .spanSm2 { grid-column: span 2 / span 2; } .spanSm3 { grid-column: span 3 / span 3; }
+  .spanSm4 { grid-column: span 4 / span 4; } .spanSm5 { grid-column: span 5 / span 5; } .spanSm6 { grid-column: span 6 / span 6; }
+  .spanSm7 { grid-column: span 7 / span 7; } .spanSm8 { grid-column: span 8 / span 8; } .spanSm9 { grid-column: span 9 / span 9; }
+  .spanSm10 { grid-column: span 10 / span 10; } .spanSm11 { grid-column: span 11 / span 11; } .spanSm12 { grid-column: span 12 / span 12; }
+}
+@media (min-width: 768px) {
+  .spanMdAuto { grid-column: auto; }
+  .spanMd1 { grid-column: span 1 / span 1; } .spanMd2 { grid-column: span 2 / span 2; } .spanMd3 { grid-column: span 3 / span 3; }
+  .spanMd4 { grid-column: span 4 / span 4; } .spanMd5 { grid-column: span 5 / span 5; } .spanMd6 { grid-column: span 6 / span 6; }
+  .spanMd7 { grid-column: span 7 / span 7; } .spanMd8 { grid-column: span 8 / span 8; } .spanMd9 { grid-column: span 9 / span 9; }
+  .spanMd10 { grid-column: span 10 / span 10; } .spanMd11 { grid-column: span 11 / span 11; } .spanMd12 { grid-column: span 12 / span 12; }
+}
+@media (min-width: 1024px) {
+  .spanLgAuto { grid-column: auto; }
+  .spanLg1 { grid-column: span 1 / span 1; } .spanLg2 { grid-column: span 2 / span 2; } .spanLg3 { grid-column: span 3 / span 3; }
+  .spanLg4 { grid-column: span 4 / span 4; } .spanLg5 { grid-column: span 5 / span 5; } .spanLg6 { grid-column: span 6 / span 6; }
+  .spanLg7 { grid-column: span 7 / span 7; } .spanLg8 { grid-column: span 8 / span 8; } .spanLg9 { grid-column: span 9 / span 9; }
+  .spanLg10 { grid-column: span 10 / span 10; } .spanLg11 { grid-column: span 11 / span 11; } .spanLg12 { grid-column: span 12 / span 12; }
+}
+@media (min-width: 1280px) {
+  .spanXlAuto { grid-column: auto; }
+  .spanXl1 { grid-column: span 1 / span 1; } .spanXl2 { grid-column: span 2 / span 2; } .spanXl3 { grid-column: span 3 / span 3; }
+  .spanXl4 { grid-column: span 4 / span 4; } .spanXl5 { grid-column: span 5 / span 5; } .spanXl6 { grid-column: span 6 / span 6; }
+  .spanXl7 { grid-column: span 7 / span 7; } .spanXl8 { grid-column: span 8 / span 8; } .spanXl9 { grid-column: span 9 / span 9; }
+  .spanXl10 { grid-column: span 10 / span 10; } .spanXl11 { grid-column: span 11 / span 11; } .spanXl12 { grid-column: span 12 / span 12; }
+}

@@ -1,0 +1,105 @@
+.shell {
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-appbar, 100);
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 12px 24px;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navTabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px;
+  background-color: var(--bg-muted);
+  border-radius: var(--radius-md);
+}
+
+.tabButton {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 120ms ease;
+}
+
+.tabButton:hover {
+  color: var(--text-primary);
+}
+
+.tabActive {
+  background-color: var(--bg-surface);
+  color: var(--color-primary-500);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-xs);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 32px 24px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  transition: max-width 200ms ease;
+}
+
+.viewportFull {
+  max-width: 1200px;
+}
+
+.viewportTablet {
+  max-width: 768px;
+  box-shadow: var(--shadow-lg);
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.viewportMobile {
+  max-width: 375px;
+  box-shadow: var(--shadow-lg);
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.footer {
+  padding: 24px;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}

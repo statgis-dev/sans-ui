@@ -3,10 +3,16 @@
   width: 100%; display: flex; align-items: center; justify-content: space-between; text-align: left;
   box-sizing: border-box; font-family: var(--font-sans); color: var(--text-primary); background-color: var(--bg-surface);
   border: var(--border-width-thin) var(--border-style-solid) var(--border-strong); border-radius: var(--radius-md);
-  transition: border-color 150ms ease, box-shadow 150ms ease; cursor: pointer; user-select: none;
+  cursor: pointer; user-select: none;
+  transition: background-color 150ms ease,
+              border-color 150ms ease,
+              box-shadow 150ms ease,
+              transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+.inputButton:hover:not(:disabled) { border-color: var(--scale-gray-400); }
+.inputButton:active:not(:disabled) { transform: scale(0.99); }
 .inputButton:focus-visible { outline: none; border-color: var(--border-focus); box-shadow: var(--shadow-focus); }
-.inputButton:disabled { opacity: 0.6; cursor: not-allowed; background-color: var(--bg-muted); }
+.inputButton:disabled { opacity: 0.6; cursor: not-allowed; background-color: var(--bg-muted); transform: none !important; }
 .placeholder { color: var(--text-muted); }
 .valueText { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .error { border-color: var(--color-danger-500) !important; }
@@ -17,8 +23,13 @@
 .sizeLg { height: 44px; font-size: var(--font-size-lg); padding-inline: 14px; }
 .sizeXl { height: 52px; font-size: var(--font-size-xl); padding-inline: 16px; }
 .actions { display: flex; align-items: center; gap: 4px; margin-left: 8px; color: var(--text-secondary); }
-.clearButton { background: transparent; border: none; padding: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-radius: var(--radius-xs); }
+.clearButton {
+  background: transparent; border: none; padding: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); border-radius: var(--radius-xs);
+  transition: background-color 150ms ease, color 150ms ease, transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 .clearButton:hover { color: var(--text-primary); background-color: var(--bg-muted); }
+.clearButton:active { transform: scale(0.90); }
 .popover {
   position: fixed;
   background-color: var(--bg-surface-elevated, var(--bg-surface));
@@ -42,13 +53,24 @@
 .calendar :global(.rdp-caption) { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; margin-bottom: 6px; border-bottom: 1px solid var(--border-subtle); }
 .calendar :global(.rdp-caption_label) { font-family: var(--font-display); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--text-primary); }
 .calendar :global(.rdp-nav) { display: flex; gap: 4px; }
-.calendar :global(.rdp-nav_button) { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; padding: 0; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); background: transparent; color: var(--text-secondary); cursor: pointer; transition: background-color 100ms ease; }
+.calendar :global(.rdp-nav_button) {
+  display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; padding: 0;
+  border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); background: transparent; color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 .calendar :global(.rdp-nav_button:hover) { background-color: var(--bg-muted); color: var(--text-primary); }
+.calendar :global(.rdp-nav_button:active) { transform: scale(0.90); }
 .calendar :global(.rdp-table) { border-collapse: collapse; }
 .calendar :global(.rdp-head_cell) { width: 32px; height: 32px; font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); color: var(--text-muted); text-align: center; }
 .calendar :global(.rdp-cell) { padding: 1px; }
-.calendar :global(.rdp-day) { width: 32px; height: 32px; border-radius: var(--radius-sm); border: none; background: transparent; font-size: var(--font-size-xs); color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 100ms ease; }
+.calendar :global(.rdp-day) {
+  width: 32px; height: 32px; border-radius: var(--radius-sm); border: none; background: transparent; font-size: var(--font-size-xs);
+  color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 .calendar :global(.rdp-day:hover:not(.rdp-day_selected)) { background-color: var(--bg-muted); }
+.calendar :global(.rdp-day:active:not(.rdp-day_disabled)) { transform: scale(0.90); }
 .calendar :global(.rdp-day_selected) { background-color: var(--color-primary-500) !important; color: #ffffff !important; font-weight: var(--font-weight-bold); }
 .calendar :global(.rdp-day_today) { font-weight: var(--font-weight-bold); color: var(--color-primary-500); }
 .calendar :global(.rdp-day_outside) { opacity: 0.3; }

@@ -3,12 +3,27 @@
   box-sizing: border-box; user-select: none; font-family: var(--font-sans);
   font-weight: var(--font-weight-semibold); line-height: var(--line-height-none);
   text-decoration: none; border: 1px solid transparent; cursor: pointer;
-  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  transition: background-color 150ms ease,
+              border-color 150ms ease,
+              color 150ms ease,
+              box-shadow 150ms ease,
+              transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
 .button:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
-.button:disabled, .button.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.button:disabled, .button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: none !important;
+}
 .fullWidth { width: 100%; }
+
+/* Active pressed micro-animation */
+.button:active:not(:disabled) {
+  transform: scale(0.97);
+}
 
 .sizeXs { height: 28px; padding-inline: 10px; font-size: var(--font-size-xs); gap: 6px; }
 .sizeSm { height: 32px; padding-inline: 12px; font-size: var(--font-size-sm); gap: 6px; }
@@ -21,75 +36,117 @@
 .radiusLg { border-radius: var(--radius-lg); } .radiusXl { border-radius: var(--radius-xl); }
 .radiusFull { border-radius: var(--radius-full); }
 
+/* Primary */
 .filledPrimary { background-color: var(--color-primary-500); color: #fff; }
-.filledPrimary:hover:not(:disabled) { background-color: var(--color-primary-600); }
+.filledPrimary:hover:not(:disabled) { background-color: var(--color-primary-600); box-shadow: var(--shadow-sm); }
+.filledPrimary:active:not(:disabled) { background-color: var(--color-primary-700); box-shadow: none; }
 .lightPrimary { background-color: var(--color-primary-100); color: var(--color-primary-700); }
 .lightPrimary:hover:not(:disabled) { background-color: var(--color-primary-200); }
+.lightPrimary:active:not(:disabled) { background-color: var(--color-primary-300); }
 .outlinePrimary { background-color: transparent; border-color: var(--color-primary-500); color: var(--color-primary-500); }
-.outlinePrimary:hover:not(:disabled) { background-color: var(--color-primary-100); }
+.outlinePrimary:hover:not(:disabled) { background-color: var(--color-primary-100); border-color: var(--color-primary-600); }
+.outlinePrimary:active:not(:disabled) { background-color: var(--color-primary-200); border-color: var(--color-primary-700); }
 .subtlePrimary { background-color: transparent; color: var(--color-primary-500); }
 .subtlePrimary:hover:not(:disabled) { background-color: var(--color-primary-100); }
+.subtlePrimary:active:not(:disabled) { background-color: var(--color-primary-200); }
 .linkPrimary { background-color: transparent; color: var(--color-primary-500); text-decoration: underline; padding-inline: 0; height: auto; }
+.linkPrimary:active:not(:disabled) { color: var(--color-primary-700); transform: translateY(1px); }
 
+/* Secondary */
 .filledSecondary { background-color: var(--color-secondary-600); color: #fff; }
-.filledSecondary:hover:not(:disabled) { background-color: var(--color-secondary-700); }
+.filledSecondary:hover:not(:disabled) { background-color: var(--color-secondary-700); box-shadow: var(--shadow-sm); }
+.filledSecondary:active:not(:disabled) { background-color: var(--color-secondary-800); box-shadow: none; }
 .lightSecondary { background-color: var(--color-secondary-100); color: var(--color-secondary-700); }
 .lightSecondary:hover:not(:disabled) { background-color: var(--color-secondary-200); }
+.lightSecondary:active:not(:disabled) { background-color: var(--color-secondary-300); }
 .outlineSecondary { background-color: transparent; border-color: var(--color-secondary-600); color: var(--color-secondary-600); }
-.outlineSecondary:hover:not(:disabled) { background-color: var(--color-secondary-100); }
+.outlineSecondary:hover:not(:disabled) { background-color: var(--color-secondary-100); border-color: var(--color-secondary-700); }
+.outlineSecondary:active:not(:disabled) { background-color: var(--color-secondary-200); border-color: var(--color-secondary-800); }
 .subtleSecondary { background-color: transparent; color: var(--color-secondary-600); }
 .subtleSecondary:hover:not(:disabled) { background-color: var(--color-secondary-100); }
+.subtleSecondary:active:not(:disabled) { background-color: var(--color-secondary-200); }
 .linkSecondary { background-color: transparent; color: var(--color-secondary-600); text-decoration: underline; padding-inline: 0; height: auto; }
+.linkSecondary:active:not(:disabled) { color: var(--color-secondary-800); transform: translateY(1px); }
 
+/* Neutral */
 .filledNeutral { background-color: var(--scale-gray-700); color: #fff; }
-.filledNeutral:hover:not(:disabled) { background-color: var(--scale-gray-800); }
+.filledNeutral:hover:not(:disabled) { background-color: var(--scale-gray-800); box-shadow: var(--shadow-sm); }
+.filledNeutral:active:not(:disabled) { background-color: var(--scale-gray-900); box-shadow: none; }
 .lightNeutral { background-color: var(--bg-muted); color: var(--text-primary); }
 .lightNeutral:hover:not(:disabled) { background-color: var(--border-strong); }
+.lightNeutral:active:not(:disabled) { background-color: var(--scale-gray-400); }
 .outlineNeutral { background-color: transparent; border-color: var(--border-strong); color: var(--text-primary); }
-.outlineNeutral:hover:not(:disabled) { background-color: var(--bg-muted); }
+.outlineNeutral:hover:not(:disabled) { background-color: var(--bg-muted); border-color: var(--text-secondary); }
+.outlineNeutral:active:not(:disabled) { background-color: var(--border-subtle); border-color: var(--text-primary); }
 .subtleNeutral { background-color: transparent; color: var(--text-primary); }
 .subtleNeutral:hover:not(:disabled) { background-color: var(--bg-muted); }
+.subtleNeutral:active:not(:disabled) { background-color: var(--border-subtle); }
 .linkNeutral { background-color: transparent; color: var(--text-primary); text-decoration: underline; padding-inline: 0; height: auto; }
+.linkNeutral:active:not(:disabled) { color: var(--color-primary-500); transform: translateY(1px); }
 
+/* Success */
 .filledSuccess { background-color: var(--color-success-500); color: #fff; }
-.filledSuccess:hover:not(:disabled) { background-color: var(--color-success-600); }
+.filledSuccess:hover:not(:disabled) { background-color: var(--color-success-600); box-shadow: var(--shadow-sm); }
+.filledSuccess:active:not(:disabled) { background-color: var(--color-success-700); box-shadow: none; }
 .lightSuccess { background-color: var(--color-success-100); color: var(--color-success-700); }
 .lightSuccess:hover:not(:disabled) { background-color: var(--color-success-200); }
+.lightSuccess:active:not(:disabled) { background-color: var(--color-success-300); }
 .outlineSuccess { background-color: transparent; border-color: var(--color-success-500); color: var(--color-success-500); }
-.outlineSuccess:hover:not(:disabled) { background-color: var(--color-success-100); }
+.outlineSuccess:hover:not(:disabled) { background-color: var(--color-success-100); border-color: var(--color-success-600); }
+.outlineSuccess:active:not(:disabled) { background-color: var(--color-success-200); border-color: var(--color-success-700); }
 .subtleSuccess { background-color: transparent; color: var(--color-success-500); }
 .subtleSuccess:hover:not(:disabled) { background-color: var(--color-success-100); }
+.subtleSuccess:active:not(:disabled) { background-color: var(--color-success-200); }
 .linkSuccess { background-color: transparent; color: var(--color-success-500); text-decoration: underline; padding-inline: 0; height: auto; }
+.linkSuccess:active:not(:disabled) { color: var(--color-success-700); transform: translateY(1px); }
 
+/* Warning */
 .filledWarning { background-color: var(--color-warning-500); color: #fff; }
-.filledWarning:hover:not(:disabled) { background-color: var(--color-warning-600); }
+.filledWarning:hover:not(:disabled) { background-color: var(--color-warning-600); box-shadow: var(--shadow-sm); }
+.filledWarning:active:not(:disabled) { background-color: var(--color-warning-700); box-shadow: none; }
 .lightWarning { background-color: var(--color-warning-100); color: var(--color-warning-700); }
 .lightWarning:hover:not(:disabled) { background-color: var(--color-warning-200); }
+.lightWarning:active:not(:disabled) { background-color: var(--color-warning-300); }
 .outlineWarning { background-color: transparent; border-color: var(--color-warning-500); color: var(--color-warning-600); }
-.outlineWarning:hover:not(:disabled) { background-color: var(--color-warning-100); }
+.outlineWarning:hover:not(:disabled) { background-color: var(--color-warning-100); border-color: var(--color-warning-600); }
+.outlineWarning:active:not(:disabled) { background-color: var(--color-warning-200); border-color: var(--color-warning-700); }
 .subtleWarning { background-color: transparent; color: var(--color-warning-600); }
 .subtleWarning:hover:not(:disabled) { background-color: var(--color-warning-100); }
+.subtleWarning:active:not(:disabled) { background-color: var(--color-warning-200); }
 .linkWarning { background-color: transparent; color: var(--color-warning-600); text-decoration: underline; padding-inline: 0; height: auto; }
+.linkWarning:active:not(:disabled) { color: var(--color-warning-700); transform: translateY(1px); }
 
+/* Danger */
 .filledDanger { background-color: var(--color-danger-500); color: #fff; }
-.filledDanger:hover:not(:disabled) { background-color: var(--color-danger-600); }
+.filledDanger:hover:not(:disabled) { background-color: var(--color-danger-600); box-shadow: var(--shadow-sm); }
+.filledDanger:active:not(:disabled) { background-color: var(--color-danger-700); box-shadow: none; }
 .lightDanger { background-color: var(--color-danger-100); color: var(--color-danger-700); }
 .lightDanger:hover:not(:disabled) { background-color: var(--color-danger-200); }
+.lightDanger:active:not(:disabled) { background-color: var(--color-danger-300); }
 .outlineDanger { background-color: transparent; border-color: var(--color-danger-500); color: var(--color-danger-500); }
-.outlineDanger:hover:not(:disabled) { background-color: var(--color-danger-100); }
+.outlineDanger:hover:not(:disabled) { background-color: var(--color-danger-100); border-color: var(--color-danger-600); }
+.outlineDanger:active:not(:disabled) { background-color: var(--color-danger-200); border-color: var(--color-danger-700); }
 .subtleDanger { background-color: transparent; color: var(--color-danger-500); }
 .subtleDanger:hover:not(:disabled) { background-color: var(--color-danger-100); }
+.subtleDanger:active:not(:disabled) { background-color: var(--color-danger-200); }
 .linkDanger { background-color: transparent; color: var(--color-danger-500); text-decoration: underline; padding-inline: 0; height: auto; }
+.linkDanger:active:not(:disabled) { color: var(--color-danger-700); transform: translateY(1px); }
 
+/* Info */
 .filledInfo { background-color: var(--color-info-500); color: #fff; }
-.filledInfo:hover:not(:disabled) { background-color: var(--color-info-600); }
+.filledInfo:hover:not(:disabled) { background-color: var(--color-info-600); box-shadow: var(--shadow-sm); }
+.filledInfo:active:not(:disabled) { background-color: var(--color-info-700); box-shadow: none; }
 .lightInfo { background-color: var(--color-info-100); color: var(--color-info-700); }
 .lightInfo:hover:not(:disabled) { background-color: var(--color-info-200); }
+.lightInfo:active:not(:disabled) { background-color: var(--color-info-300); }
 .outlineInfo { background-color: transparent; border-color: var(--color-info-500); color: var(--color-info-500); }
-.outlineInfo:hover:not(:disabled) { background-color: var(--color-info-100); }
+.outlineInfo:hover:not(:disabled) { background-color: var(--color-info-100); border-color: var(--color-info-600); }
+.outlineInfo:active:not(:disabled) { background-color: var(--color-info-200); border-color: var(--color-info-700); }
 .subtleInfo { background-color: transparent; color: var(--color-info-500); }
 .subtleInfo:hover:not(:disabled) { background-color: var(--color-info-100); }
+.subtleInfo:active:not(:disabled) { background-color: var(--color-info-200); }
 .linkInfo { background-color: transparent; color: var(--color-info-500); text-decoration: underline; padding-inline: 0; height: auto; }
+.linkInfo:active:not(:disabled) { color: var(--color-info-700); transform: translateY(1px); }
 
 .leftSection, .rightSection, .label { display: inline-flex; align-items: center; }
 .spinner { animation: spin 800ms linear infinite; display: inline-block; width: 1em; height: 1em; }

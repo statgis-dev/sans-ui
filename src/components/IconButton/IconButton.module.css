@@ -1,10 +1,27 @@
 .iconButton {
   display: inline-flex; align-items: center; justify-content: center; position: relative;
   box-sizing: border-box; padding: 0; border: 1px solid transparent; cursor: pointer; user-select: none;
-  line-height: 1; transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease; flex-shrink: 0;
+  line-height: 1; flex-shrink: 0;
+  transition: background-color 150ms ease,
+              border-color 150ms ease,
+              color 150ms ease,
+              box-shadow 150ms ease,
+              transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .iconButton:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
-.iconButton:disabled, .iconButton.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.iconButton:disabled, .iconButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Active pressed tactile micro-animation */
+.iconButton:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
 .sizeXs { width: 24px; height: 24px; font-size: 14px; }
 .sizeSm { width: 30px; height: 30px; font-size: 16px; }
 .sizeMd { width: 36px; height: 36px; font-size: 18px; }
@@ -14,31 +31,102 @@
 .radiusSm { border-radius: var(--radius-sm); } .radiusMd { border-radius: var(--radius-md); }
 .radiusLg { border-radius: var(--radius-lg); } .radiusXl { border-radius: var(--radius-xl); } .radiusFull { border-radius: var(--radius-full); }
 
-.subtleNeutral { background: transparent; color: var(--text-secondary); } .subtleNeutral:hover:not(:disabled) { background: var(--bg-muted); color: var(--text-primary); }
-.filledNeutral { background: var(--scale-gray-700); color: #fff; } .filledNeutral:hover:not(:disabled) { background: var(--scale-gray-800); }
-.lightNeutral { background: var(--bg-muted); color: var(--text-primary); } .lightNeutral:hover:not(:disabled) { background: var(--border-strong); }
+/* Neutral */
+.subtleNeutral { background: transparent; color: var(--text-secondary); }
+.subtleNeutral:hover:not(:disabled) { background: var(--bg-muted); color: var(--text-primary); }
+.subtleNeutral:active:not(:disabled) { background: var(--border-subtle); }
+.filledNeutral { background: var(--scale-gray-700); color: #fff; }
+.filledNeutral:hover:not(:disabled) { background: var(--scale-gray-800); box-shadow: var(--shadow-sm); }
+.filledNeutral:active:not(:disabled) { background: var(--scale-gray-900); box-shadow: none; }
+.lightNeutral { background: var(--bg-muted); color: var(--text-primary); }
+.lightNeutral:hover:not(:disabled) { background: var(--border-strong); }
+.lightNeutral:active:not(:disabled) { background: var(--scale-gray-400); }
 .outlineNeutral { background: transparent; border-color: var(--border-strong); color: var(--text-primary); }
+.outlineNeutral:hover:not(:disabled) { background: var(--bg-muted); border-color: var(--text-secondary); }
+.outlineNeutral:active:not(:disabled) { background: var(--border-subtle); border-color: var(--text-primary); }
 
-.subtlePrimary { background: transparent; color: var(--color-primary-500); } .subtlePrimary:hover:not(:disabled) { background: var(--color-primary-100); }
-.filledPrimary { background: var(--color-primary-500); color: #fff; } .filledPrimary:hover:not(:disabled) { background: var(--color-primary-600); }
-.lightPrimary { background: var(--color-primary-100); color: var(--color-primary-700); } .lightPrimary:hover:not(:disabled) { background: var(--color-primary-200); }
+/* Primary */
+.subtlePrimary { background: transparent; color: var(--color-primary-500); }
+.subtlePrimary:hover:not(:disabled) { background: var(--color-primary-100); }
+.subtlePrimary:active:not(:disabled) { background: var(--color-primary-200); }
+.filledPrimary { background: var(--color-primary-500); color: #fff; }
+.filledPrimary:hover:not(:disabled) { background: var(--color-primary-600); box-shadow: var(--shadow-sm); }
+.filledPrimary:active:not(:disabled) { background: var(--color-primary-700); box-shadow: none; }
+.lightPrimary { background: var(--color-primary-100); color: var(--color-primary-700); }
+.lightPrimary:hover:not(:disabled) { background: var(--color-primary-200); }
+.lightPrimary:active:not(:disabled) { background: var(--color-primary-300); }
 .outlinePrimary { background: transparent; border-color: var(--color-primary-500); color: var(--color-primary-500); }
+.outlinePrimary:hover:not(:disabled) { background: var(--color-primary-100); border-color: var(--color-primary-600); }
+.outlinePrimary:active:not(:disabled) { background: var(--color-primary-200); border-color: var(--color-primary-700); }
 
-.subtleSecondary { background: transparent; color: var(--color-secondary-600); } .subtleSecondary:hover:not(:disabled) { background: var(--color-secondary-100); }
-.filledSecondary { background: var(--color-secondary-600); color: #fff; } .filledSecondary:hover:not(:disabled) { background: var(--color-secondary-700); }
+/* Secondary */
+.subtleSecondary { background: transparent; color: var(--color-secondary-600); }
+.subtleSecondary:hover:not(:disabled) { background: var(--color-secondary-100); }
+.subtleSecondary:active:not(:disabled) { background: var(--color-secondary-200); }
+.filledSecondary { background: var(--color-secondary-600); color: #fff; }
+.filledSecondary:hover:not(:disabled) { background: var(--color-secondary-700); box-shadow: var(--shadow-sm); }
+.filledSecondary:active:not(:disabled) { background: var(--color-secondary-800); box-shadow: none; }
 .lightSecondary { background: var(--color-secondary-100); color: var(--color-secondary-700); }
+.lightSecondary:hover:not(:disabled) { background: var(--color-secondary-200); }
+.lightSecondary:active:not(:disabled) { background: var(--color-secondary-300); }
 .outlineSecondary { background: transparent; border-color: var(--color-secondary-600); color: var(--color-secondary-600); }
+.outlineSecondary:hover:not(:disabled) { background: var(--color-secondary-100); border-color: var(--color-secondary-700); }
+.outlineSecondary:active:not(:disabled) { background: var(--color-secondary-200); border-color: var(--color-secondary-800); }
 
-.subtleSuccess { background: transparent; color: var(--color-success-500); } .filledSuccess { background: var(--color-success-500); color: #fff; }
-.lightSuccess { background: var(--color-success-100); color: var(--color-success-700); } .outlineSuccess { background: transparent; border-color: var(--color-success-500); color: var(--color-success-500); }
+/* Success */
+.subtleSuccess { background: transparent; color: var(--color-success-500); }
+.subtleSuccess:hover:not(:disabled) { background: var(--color-success-100); }
+.subtleSuccess:active:not(:disabled) { background: var(--color-success-200); }
+.filledSuccess { background: var(--color-success-500); color: #fff; }
+.filledSuccess:hover:not(:disabled) { background: var(--color-success-600); box-shadow: var(--shadow-sm); }
+.filledSuccess:active:not(:disabled) { background: var(--color-success-700); box-shadow: none; }
+.lightSuccess { background: var(--color-success-100); color: var(--color-success-700); }
+.lightSuccess:hover:not(:disabled) { background: var(--color-success-200); }
+.lightSuccess:active:not(:disabled) { background: var(--color-success-300); }
+.outlineSuccess { background: transparent; border-color: var(--color-success-500); color: var(--color-success-500); }
+.outlineSuccess:hover:not(:disabled) { background: var(--color-success-100); border-color: var(--color-success-600); }
+.outlineSuccess:active:not(:disabled) { background: var(--color-success-200); border-color: var(--color-success-700); }
 
-.subtleWarning { background: transparent; color: var(--color-warning-600); } .filledWarning { background: var(--color-warning-500); color: #fff; }
-.lightWarning { background: var(--color-warning-100); color: var(--color-warning-700); } .outlineWarning { background: transparent; border-color: var(--color-warning-500); color: var(--color-warning-600); }
+/* Warning */
+.subtleWarning { background: transparent; color: var(--color-warning-600); }
+.subtleWarning:hover:not(:disabled) { background: var(--color-warning-100); }
+.subtleWarning:active:not(:disabled) { background: var(--color-warning-200); }
+.filledWarning { background: var(--color-warning-500); color: #fff; }
+.filledWarning:hover:not(:disabled) { background: var(--color-warning-600); box-shadow: var(--shadow-sm); }
+.filledWarning:active:not(:disabled) { background: var(--color-warning-700); box-shadow: none; }
+.lightWarning { background: var(--color-warning-100); color: var(--color-warning-700); }
+.lightWarning:hover:not(:disabled) { background: var(--color-warning-200); }
+.lightWarning:active:not(:disabled) { background: var(--color-warning-300); }
+.outlineWarning { background: transparent; border-color: var(--color-warning-500); color: var(--color-warning-600); }
+.outlineWarning:hover:not(:disabled) { background: var(--color-warning-100); border-color: var(--color-warning-600); }
+.outlineWarning:active:not(:disabled) { background: var(--color-warning-200); border-color: var(--color-warning-700); }
 
-.subtleDanger { background: transparent; color: var(--color-danger-500); } .filledDanger { background: var(--color-danger-500); color: #fff; }
-.lightDanger { background: var(--color-danger-100); color: var(--color-danger-700); } .outlineDanger { background: transparent; border-color: var(--color-danger-500); color: var(--color-danger-500); }
+/* Danger */
+.subtleDanger { background: transparent; color: var(--color-danger-500); }
+.subtleDanger:hover:not(:disabled) { background: var(--color-danger-100); }
+.subtleDanger:active:not(:disabled) { background: var(--color-danger-200); }
+.filledDanger { background: var(--color-danger-500); color: #fff; }
+.filledDanger:hover:not(:disabled) { background: var(--color-danger-600); box-shadow: var(--shadow-sm); }
+.filledDanger:active:not(:disabled) { background: var(--color-danger-700); box-shadow: none; }
+.lightDanger { background: var(--color-danger-100); color: var(--color-danger-700); }
+.lightDanger:hover:not(:disabled) { background: var(--color-danger-200); }
+.lightDanger:active:not(:disabled) { background: var(--color-danger-300); }
+.outlineDanger { background: transparent; border-color: var(--color-danger-500); color: var(--color-danger-500); }
+.outlineDanger:hover:not(:disabled) { background: var(--color-danger-100); border-color: var(--color-danger-600); }
+.outlineDanger:active:not(:disabled) { background: var(--color-danger-200); border-color: var(--color-danger-700); }
 
-.subtleInfo { background: transparent; color: var(--color-info-500); } .filledInfo { background: var(--color-info-500); color: #fff; }
-.lightInfo { background: var(--color-info-100); color: var(--color-info-700); } .outlineInfo { background: transparent; border-color: var(--color-info-500); color: var(--color-info-500); }
+/* Info */
+.subtleInfo { background: transparent; color: var(--color-info-500); }
+.subtleInfo:hover:not(:disabled) { background: var(--color-info-100); }
+.subtleInfo:active:not(:disabled) { background: var(--color-info-200); }
+.filledInfo { background: var(--color-info-500); color: #fff; }
+.filledInfo:hover:not(:disabled) { background: var(--color-info-600); box-shadow: var(--shadow-sm); }
+.filledInfo:active:not(:disabled) { background: var(--color-info-700); box-shadow: none; }
+.lightInfo { background: var(--color-info-100); color: var(--color-info-700); }
+.lightInfo:hover:not(:disabled) { background: var(--color-info-200); }
+.lightInfo:active:not(:disabled) { background: var(--color-info-300); }
+.outlineInfo { background: transparent; border-color: var(--color-info-500); color: var(--color-info-500); }
+.outlineInfo:hover:not(:disabled) { background: var(--color-info-100); border-color: var(--color-info-600); }
+.outlineInfo:active:not(:disabled) { background: var(--color-info-200); border-color: var(--color-info-700); }
 
 .spinner { animation: spin 800ms linear infinite; display: inline-block; width: 1em; height: 1em; }

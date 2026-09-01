@@ -12,7 +12,6 @@ import { MediaSection } from './sections/MediaSection';
 import { OverlaysSection } from './sections/OverlaysSection';
 import { MapSection } from './sections/MapSection';
 
-type Tab = 'typography' | 'layout' | 'actions' | 'forms' | 'media' | 'overlays';
 type Tab = 'typography' | 'layout' | 'actions' | 'forms' | 'media' | 'overlays' | 'map';
 type Viewport = 'full' | 'tablet' | 'mobile';
 

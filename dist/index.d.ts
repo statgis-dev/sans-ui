@@ -33,6 +33,19 @@ export declare interface BadgeProps extends UniversalProps, Omit<default_2.HTMLA
 
 export declare type BadgeVariant = 'filled' | 'light' | 'outline' | 'dot';
 
+export declare const BasemapToggleControl: default_2.FC<BasemapToggleControlProps>;
+
+export declare interface BasemapToggleControlProps {
+    currentBasemap: 'vector' | 'satellite' | string;
+    onToggle: () => void;
+    size?: SizeScale;
+    radius?: RadiusScale;
+    className?: string;
+    style?: default_2.CSSProperties;
+    'aria-label'?: string;
+    title?: string;
+}
+
 export declare const Box: default_2.ForwardRefExoticComponent<BoxProps & default_2.RefAttributes<HTMLElement>>;
 
 export declare interface BoxProps extends UniversalProps, Omit<default_2.HTMLAttributes<HTMLElement>, 'color'> {
@@ -93,6 +106,18 @@ export declare interface CardProps extends UniversalProps, default_2.HTMLAttribu
 
 export declare type ColSpan = number | 'auto';
 
+export declare const CompassControl: default_2.FC<CompassControlProps>;
+
+export declare interface CompassControlProps {
+    mapId?: string;
+    size?: SizeScale;
+    radius?: RadiusScale;
+    className?: string;
+    style?: default_2.CSSProperties;
+    'aria-label'?: string;
+    title?: string;
+}
+
 export declare const Container: default_2.ForwardRefExoticComponent<ContainerProps & default_2.RefAttributes<HTMLElement>>;
 
 export declare interface ContainerProps extends UniversalProps, default_2.HTMLAttributes<HTMLElement> {
@@ -138,6 +163,22 @@ export declare interface DateRangePickerProps extends UniversalProps, Omit<defau
     onChange?: (range: DateRange | null) => void;
 }
 
+export declare const DefaultViewControl: default_2.FC<DefaultViewControlProps>;
+
+export declare interface DefaultViewControlProps {
+    center?: [number, number];
+    zoom?: number;
+    pitch?: number;
+    bearing?: number;
+    mapId?: string;
+    size?: SizeScale;
+    radius?: RadiusScale;
+    className?: string;
+    style?: default_2.CSSProperties;
+    'aria-label'?: string;
+    title?: string;
+}
+
 export declare const Divider: default_2.ForwardRefExoticComponent<DividerProps & default_2.RefAttributes<HTMLDivElement>>;
 
 export declare interface DividerProps extends UniversalProps, Omit<default_2.HTMLAttributes<HTMLDivElement>, 'color'> {
@@ -146,6 +187,33 @@ export declare interface DividerProps extends UniversalProps, Omit<default_2.HTM
     size?: 1 | 2 | 4 | 8;
     color?: SemanticColors | 'border';
     label?: string | default_2.ReactNode;
+}
+
+export declare const FullscreenControl: default_2.FC<FullscreenControlProps>;
+
+export declare interface FullscreenControlProps {
+    containerRef?: default_2.RefObject<HTMLElement>;
+    size?: SizeScale;
+    radius?: RadiusScale;
+    className?: string;
+    style?: default_2.CSSProperties;
+    'aria-label'?: string;
+    title?: string;
+}
+
+export declare const GeolocateControl: default_2.FC<GeolocateControlProps>;
+
+export declare interface GeolocateControlProps {
+    zoom?: number;
+    mapId?: string;
+    size?: SizeScale;
+    radius?: RadiusScale;
+    onGeolocate?: (coords: GeolocationCoordinates) => void;
+    onError?: (error: GeolocationPositionError) => void;
+    className?: string;
+    style?: default_2.CSSProperties;
+    'aria-label'?: string;
+    title?: string;
 }
 
 export declare const Grid: GridComponent;
@@ -230,6 +298,18 @@ export declare interface LoaderProps extends UniversalProps, Omit<default_2.HTML
 }
 
 export declare type LoaderVariant = 'spinner' | 'dots' | 'bars';
+
+export declare type MapControlPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+
+export declare const MapControlWrapper: default_2.FC<MapControlWrapperProps>;
+
+export declare interface MapControlWrapperProps {
+    position?: MapControlPosition;
+    gap?: 'xs' | 'sm' | 'md' | 'lg';
+    children: default_2.ReactNode;
+    className?: string;
+    style?: default_2.CSSProperties;
+}
 
 export declare const Modal: default_2.FC<ModalProps>;
 
@@ -401,5 +481,14 @@ export declare interface UniversalProps {
 }
 
 export declare function useTheme(): ThemeContextValue;
+
+export declare const ZoomControlGroup: default_2.FC<ZoomControlGroupProps>;
+
+export declare interface ZoomControlGroupProps {
+    mapId?: string;
+    size?: SizeScale;
+    className?: string;
+    style?: default_2.CSSProperties;
+}
 
 export { }

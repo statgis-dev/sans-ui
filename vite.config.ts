@@ -35,11 +35,21 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'react-map-gl',
+        'react-map-gl/maplibre',
+        'maplibre-gl',
+      ],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
           'react/jsx-runtime': 'jsxRuntime',
+          'react-map-gl/maplibre': 'ReactMapGL',
+          'maplibre-gl': 'maplibregl',
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name?.endsWith('.css')) return 'style.css';

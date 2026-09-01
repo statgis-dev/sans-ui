@@ -10,8 +10,10 @@ import { ActionsSection } from './sections/ActionsSection';
 import { FormsSection } from './sections/FormsSection';
 import { MediaSection } from './sections/MediaSection';
 import { OverlaysSection } from './sections/OverlaysSection';
+import { MapSection } from './sections/MapSection';
 
 type Tab = 'typography' | 'layout' | 'actions' | 'forms' | 'media' | 'overlays';
+type Tab = 'typography' | 'layout' | 'actions' | 'forms' | 'media' | 'overlays' | 'map';
 type Viewport = 'full' | 'tablet' | 'mobile';
 
 export const App: React.FC = () => {
@@ -75,6 +77,9 @@ export const App: React.FC = () => {
             <button className={clsx(styles.tabButton, activeTab === 'overlays' && styles.tabActive)} onClick={() => setActiveTab('overlays')}>
               Overlays
             </button>
+            <button className={clsx(styles.tabButton, activeTab === 'map' && styles.tabActive)} onClick={() => setActiveTab('map')}>
+              Map Controls
+            </button>
           </nav>
 
           {/* Controls: Viewport + Theme Switcher */}
@@ -112,6 +117,7 @@ export const App: React.FC = () => {
         {activeTab === 'forms' && <FormsSection />}
         {activeTab === 'media' && <MediaSection />}
         {activeTab === 'overlays' && <OverlaysSection />}
+        {activeTab === 'map' && <MapSection />}
       </main>
 
       {/* Footer */}

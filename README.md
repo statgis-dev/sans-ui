@@ -20,7 +20,7 @@
   - [ThemeProvider](#themeprovider)
   - [useTheme Hook](#usetheme-hook)
   - [Design Tokens Scales](#design-tokens-scales)
-- [Component Catalog (23 Components)](#component-catalog)
+- [Component Catalog (30 Components)](#component-catalog)
   - [1. Typography & Base](#1-typography--base)
     - [Text](#text)
     - [Title](#title)
@@ -52,6 +52,14 @@
     - [Modal](#modal)
     - [Tooltip](#tooltip)
     - [Loader](#loader)
+  - [7. Map Controls & Overlays](#7-map-controls--overlays)
+    - [DefaultViewControl](#defaultviewcontrol)
+    - [GeolocateControl](#geolocatecontrol)
+    - [ZoomControlGroup](#zoomcontrolgroup)
+    - [BasemapToggleControl](#basemaptogglecontrol)
+    - [CompassControl](#compasscontrol)
+    - [FullscreenControl](#fullscreencontrol)
+    - [MapControlWrapper](#mapcontrolwrapper)
 - [Development & Sandbox](#development--sandbox)
 - [License](#license)
 
@@ -721,6 +729,124 @@ Animated vector loading indicator supporting 3 SVG animation variants.
 | `variant` | `'spinner' | 'dots' | 'bars'` | `'spinner'` | Animation variant |
 | `color` | `SemanticColors` | `'primary'` | Loader color token |
 | `size` | `SizeScale | number` | `'md'` | Standard scale or explicit numeric pixel size |
+
+---
+
+
+### 7. Map Controls & Overlays
+
+Modular map control widgets built with `react-map-gl/maplibre`, styled using `sans-ui` design tokens and accessible `IconButton` controls.
+
+```tsx
+import { Map } from 'react-map-gl/maplibre';
+import {
+  MapControlWrapper,
+  FullscreenControl,
+  BasemapToggleControl,
+  DefaultViewControl,
+  GeolocateControl,
+  CompassControl,
+  ZoomControlGroup,
+} from 'sans-ui';
+import 'maplibre-gl/dist/maplibre-gl.css';
+
+function InteractiveMap() {
+  const [basemap, setBasemap] = useState<'vector' | 'satellite'>('vector');
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+      <Map
+        initialViewState={{ longitude: -74.006, latitude: 40.7128, zoom: 11 }}
+        mapStyle={basemap === 'vector' ? 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json' : '...'}
+      >
+        <MapControlWrapper position="top-right" gap="sm">
+          <FullscreenControl />
+          <BasemapToggleControl currentBasemap={basemap} onToggle={() => setBasemap(b => b === 'vector' ? 'satellite' : 'vector')} />
+          <DefaultViewControl center={[-74.006, 40.7128]} zoom={11} />
+          <GeolocateControl zoom={14} />
+          <CompassControl />
+          <ZoomControlGroup />
+        </MapControlWrapper>
+      </Map>
+    </div>
+  );
+}
+```
+
+#### `DefaultViewControl`
+Smoothly animates camera to initial center, zoom, pitch, and bearing coordinates.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `center` | `[number, number]` | `[-74.006, 40.7128]` | Target longitude and latitude coordinates |
+| `zoom` | `number` | `9` | Target zoom level |
+| `pitch` | `number` | `0` | Target camera tilt pitch (0–85) |
+| `bearing` | `number` | `0` | Target camera bearing rotation (0–360) |
+| `mapId` | `string` | — | Target map ID in multi-map contexts |
+| `size` | `SizeScale` | `'md'` | Control button dimensions |
+
+---
+
+#### `GeolocateControl`
+Uses browser Geolocation API to find user coordinates and flies camera to user location.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `zoom` | `number` | `14` | Zoom level when location is resolved |
+| `onGeolocate` | `(coords: GeolocationCoordinates) => void` | — | Callback invoked on successful geolocation |
+| `onError` | `(error: GeolocationPositionError) => void` | — | Callback on denial or timeout |
+| `size` | `SizeScale` | `'md'` | Control button dimensions |
+
+---
+
+#### `ZoomControlGroup`
+Unified vertical grouped pill combining Zoom In (`+`) and Zoom Out (`−`) buttons with seamless border integration.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `size` | `SizeScale` | `'md'` | Button size scale |
+| `mapId` | `string` | — | Optional map ID |
+
+---
+
+#### `BasemapToggleControl`
+Toggles active basemap style and dynamically switches icons between street/vector map and satellite imagery.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `currentBasemap` | `'vector' | 'satellite' | string` | *required* | Current active basemap identifier |
+| `onToggle` | `() => void` | *required* | Click toggle handler |
+| `size` | `SizeScale` | `'md'` | Button size scale |
+
+---
+
+#### `CompassControl`
+Subscribes to map bearing in real-time and rotates compass needle SVG. On click, smoothly resets bearing and pitch to North.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `size` | `SizeScale` | `'md'` | Button size scale |
+| `mapId` | `string` | — | Optional map ID |
+
+---
+
+#### `FullscreenControl`
+Toggles native browser fullscreen mode on the map container with dynamic expand/compress icons.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `containerRef` | `React.RefObject<HTMLElement>` | — | Target map container to make fullscreen |
+| `size` | `SizeScale` | `'md'` | Button size scale |
+
+---
+
+#### `MapControlWrapper`
+Floating overlay positioning container supporting `top-left`, `top-right`, `bottom-left`, and `bottom-right` anchors.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `position` | `'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'` | `'top-right'` | Screen corner anchor |
+| `gap` | `'xs' | 'sm' | 'md' | 'lg'` | `'sm'` | Spacing between controls |
 
 ---
 

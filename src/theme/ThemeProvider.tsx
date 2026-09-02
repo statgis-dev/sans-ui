@@ -8,7 +8,7 @@ export type DensityMode = 'compact' | 'comfortable' | 'spacious';
 export type FontScale = 'sm' | 'md' | 'lg';
 
 export interface ThemeColorsConfig {
-  primary?: string;   // Single HEX code (e.g. "#00B5D9")
+  primary?: string;   // Single HEX code (e.g. "#00B5D9" or "#D4AF37")
   secondary?: string; // Single HEX code (e.g. "#005F96")
 }
 
@@ -157,7 +157,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     }
   }, [theme, targetElement]);
 
-  // Synchronize all dynamic CSS Variables on root / targetElement
+  // Synchronize all dynamic CSS Variables on root / targetElement with dark mode semantic inversion
   useEffect(() => {
     const el = targetElement || (typeof document !== 'undefined' ? document.documentElement : null);
     if (!el) return;
@@ -165,11 +165,31 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     // 1. Primary Colors & Focus Ring
     if (config.colors?.primary) {
       const primaryRamp = generateColorRamp(config.colors.primary);
-      for (const [step, hex] of Object.entries(primaryRamp)) {
-        el.style.setProperty(`--color-primary-${step}`, hex);
+
+      if (theme === 'dark') {
+        // Dark Theme Semantic Inversion (matching base.css [data-theme="dark"]):
+        // --color-primary-100: deep dark tint for containers / subtle backgrounds
+        // --color-primary-700 / 800: high contrast light text
+        el.style.setProperty('--color-primary-100', primaryRamp[900]);
+        el.style.setProperty('--color-primary-200', primaryRamp[800]);
+        el.style.setProperty('--color-primary-300', primaryRamp[600]);
+        el.style.setProperty('--color-primary-400', primaryRamp[500]);
+        el.style.setProperty('--color-primary-500', primaryRamp[400]);
+        el.style.setProperty('--color-primary-600', primaryRamp[300]);
+        el.style.setProperty('--color-primary-700', primaryRamp[200]);
+        el.style.setProperty('--color-primary-800', primaryRamp[100]);
+        el.style.setProperty('--color-primary-900', '#ffffff');
+
+        el.style.setProperty('--border-focus', primaryRamp[400]);
+        el.style.setProperty('--shadow-focus', generateFocusRing(primaryRamp[400]));
+      } else {
+        // Light Theme:
+        for (const [step, hex] of Object.entries(primaryRamp)) {
+          el.style.setProperty(`--color-primary-${step}`, hex);
+        }
+        el.style.setProperty('--border-focus', config.colors.primary);
+        el.style.setProperty('--shadow-focus', generateFocusRing(config.colors.primary));
       }
-      el.style.setProperty('--border-focus', config.colors.primary);
-      el.style.setProperty('--shadow-focus', generateFocusRing(config.colors.primary));
     } else {
       for (const step of [100, 200, 300, 400, 500, 600, 700, 800, 900]) {
         el.style.removeProperty(`--color-primary-${step}`);
@@ -181,8 +201,21 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     // 2. Secondary Colors
     if (config.colors?.secondary) {
       const secondaryRamp = generateColorRamp(config.colors.secondary);
-      for (const [step, hex] of Object.entries(secondaryRamp)) {
-        el.style.setProperty(`--color-secondary-${step}`, hex);
+
+      if (theme === 'dark') {
+        el.style.setProperty('--color-secondary-100', secondaryRamp[900]);
+        el.style.setProperty('--color-secondary-200', secondaryRamp[800]);
+        el.style.setProperty('--color-secondary-300', secondaryRamp[700]);
+        el.style.setProperty('--color-secondary-400', secondaryRamp[500]);
+        el.style.setProperty('--color-secondary-500', secondaryRamp[400]);
+        el.style.setProperty('--color-secondary-600', secondaryRamp[300]);
+        el.style.setProperty('--color-secondary-700', secondaryRamp[200]);
+        el.style.setProperty('--color-secondary-800', secondaryRamp[100]);
+        el.style.setProperty('--color-secondary-900', '#ffffff');
+      } else {
+        for (const [step, hex] of Object.entries(secondaryRamp)) {
+          el.style.setProperty(`--color-secondary-${step}`, hex);
+        }
       }
     } else {
       for (const step of [100, 200, 300, 400, 500, 600, 700, 800, 900]) {
@@ -234,11 +267,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       el.style.setProperty('--shadow-lg', 'none');
       el.style.setProperty('--shadow-xl', 'none');
     } else if (config.elevation === 'high-contrast') {
-      el.style.setProperty('--shadow-xs', '0 1px 3px 0 rgba(15, 23, 42, 0.15)');
-      el.style.setProperty('--shadow-sm', '0 2px 6px 0 rgba(15, 23, 42, 0.18), 0 1px 3px 0 rgba(15, 23, 42, 0.12)');
-      el.style.setProperty('--shadow-md', '0 6px 12px -1px rgba(15, 23, 42, 0.22), 0 3px 6px -2px rgba(15, 23, 42, 0.15)');
-      el.style.setProperty('--shadow-lg', '0 14px 24px -3px rgba(15, 23, 42, 0.25), 0 6px 10px -4px rgba(15, 23, 42, 0.18)');
-      el.style.setProperty('--shadow-xl', '0 24px 38px -5px rgba(15, 23, 42, 0.30), 0 12px 18px -6px rgba(15, 23, 42, 0.20)');
+      if (theme === 'dark') {
+        el.style.setProperty('--shadow-xs', '0 1px 3px 0 rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.12)');
+        el.style.setProperty('--shadow-sm', '0 2px 6px 0 rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.14)');
+        el.style.setProperty('--shadow-md', '0 6px 14px -1px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.16)');
+        el.style.setProperty('--shadow-lg', '0 14px 28px -3px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.2)');
+        el.style.setProperty('--shadow-xl', '0 24px 44px -5px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.25)');
+      } else {
+        el.style.setProperty('--shadow-xs', '0 1px 3px 0 rgba(15, 23, 42, 0.15)');
+        el.style.setProperty('--shadow-sm', '0 2px 6px 0 rgba(15, 23, 42, 0.18), 0 1px 3px 0 rgba(15, 23, 42, 0.12)');
+        el.style.setProperty('--shadow-md', '0 6px 12px -1px rgba(15, 23, 42, 0.22), 0 3px 6px -2px rgba(15, 23, 42, 0.15)');
+        el.style.setProperty('--shadow-lg', '0 14px 24px -3px rgba(15, 23, 42, 0.25), 0 6px 10px -4px rgba(15, 23, 42, 0.18)');
+        el.style.setProperty('--shadow-xl', '0 24px 38px -5px rgba(15, 23, 42, 0.30), 0 12px 18px -6px rgba(15, 23, 42, 0.20)');
+      }
     } else {
       // Subtle (default)
       el.style.removeProperty('--shadow-xs');
@@ -335,7 +376,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     } else {
       el.style.removeProperty('--font-mono');
     }
-  }, [config, targetElement]);
+  }, [theme, config, targetElement]);
 
   const value = useMemo(
     () => ({

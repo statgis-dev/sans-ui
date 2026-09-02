@@ -207,16 +207,6 @@ export declare interface FullscreenControlProps {
     title?: string;
 }
 
-/**
- * Generates a full 100–900 color ramp from a single base HEX color (set at step 500).
- */
-export declare function generateColorRamp(hex: string): Record<number, string>;
-
-/**
- * Computes an accessible focus ring box-shadow string from a HEX color.
- */
-export declare function generateFocusRing(hex: string): string;
-
 export declare const GeolocateControl: default_2.FC<GeolocateControlProps>;
 
 export declare interface GeolocateControlProps {
@@ -263,27 +253,6 @@ export declare interface GroupProps extends UniversalProps, default_2.HTMLAttrib
     wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
     grow?: boolean;
 }
-
-/**
- * Converts a hex color code to HSL values.
- */
-export declare function hexToHsl(hex: string): HSL;
-
-/**
- * Parses a 3, 4, 6, or 8 digit hex color code into standard RGB (0-255).
- */
-export declare function hexToRgb(hex: string): RGB;
-
-export declare interface HSL {
-    h: number;
-    s: number;
-    l: number;
-}
-
-/**
- * Converts HSL values to a 6-digit hex string.
- */
-export declare function hslToHex(h: number, s: number, l: number): string;
 
 export declare const IconButton: default_2.ForwardRefExoticComponent<IconButtonProps & default_2.RefAttributes<HTMLButtonElement>>;
 
@@ -385,21 +354,6 @@ export declare interface NumberInputProps extends UniversalProps, Omit<default_2
 export declare type RadiusPreset = 'sharp' | 'balanced' | 'rounded' | 'pill';
 
 export declare type RadiusScale = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
-
-/**
- * Pure TypeScript Color Calculation Utilities for sans-ui Dynamic Theming.
- * Zero external runtime dependencies.
- */
-export declare interface RGB {
-    r: number;
-    g: number;
-    b: number;
-}
-
-/**
- * Converts RGB (0-255) to 6-digit uppercase hex string (e.g. "#00B5D9").
- */
-export declare function rgbToHex(r: number, g: number, b: number): string;
 
 export declare const Select: default_2.ForwardRefExoticComponent<SelectProps & default_2.RefAttributes<HTMLButtonElement>>;
 

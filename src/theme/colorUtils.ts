@@ -126,31 +126,41 @@ export function hslToHex(h: number, s: number, l: number): string {
 
 /**
  * Generates a full 100–900 color ramp from a single base HEX color (set at step 500).
+ * Strictly enforces perceptual luminance anchors:
+ * - 100: ~95% (Very light pastel tint)
+ * - 200: ~85%
+ * - 300: ~72%
+ * - 400: ~58%
+ * - 500: Base color
+ * - 600: ~42%
+ * - 700: ~32%
+ * - 800: ~22%
+ * - 900: ~13% (Deep dark tinted background)
  */
 export function generateColorRamp(hex: string): Record<number, string> {
   const { h, s } = hexToHsl(hex);
 
-  // Standard target lightness scale (0 - 100)
+  // Strictly calibrated luminance anchors
   const targetLightness: Record<number, number> = {
     100: 95,
-    200: 88,
-    300: 76,
-    400: 62,
-    500: hexToHsl(hex).l, // Keep original lightness for 500
-    600: Math.max(8, Math.round(hexToHsl(hex).l * 0.82)),
-    700: Math.max(6, Math.round(hexToHsl(hex).l * 0.68)),
-    800: Math.max(4, Math.round(hexToHsl(hex).l * 0.52)),
-    900: Math.max(2, Math.round(hexToHsl(hex).l * 0.38)),
+    200: 85,
+    300: 72,
+    400: 58,
+    500: hexToHsl(hex).l, // Preserve base color lightness for step 500
+    600: 42,
+    700: 32,
+    800: 22,
+    900: 13,
   };
 
   const ramp: Record<number, string> = {};
 
-  // For very light shades (100-200), slightly moderate saturation if base is very intense
   for (const step of [100, 200, 300, 400, 500, 600, 700, 800, 900]) {
     if (step === 500) {
       ramp[500] = hex.toUpperCase();
     } else {
-      const stepSat = step <= 200 ? Math.max(20, Math.min(s, 70)) : s;
+      // Moderate saturation for extreme lightness (100-200) to keep pastel clean
+      const stepSat = step <= 200 ? Math.max(15, Math.min(s, 65)) : s;
       ramp[step] = hslToHex(h, stepSat, targetLightness[step]);
     }
   }

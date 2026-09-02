@@ -179,6 +179,8 @@ export declare interface DefaultViewControlProps {
     title?: string;
 }
 
+export declare type DensityMode = 'compact' | 'comfortable' | 'spacious';
+
 export declare const Divider: default_2.ForwardRefExoticComponent<DividerProps & default_2.RefAttributes<HTMLDivElement>>;
 
 export declare interface DividerProps extends UniversalProps, Omit<default_2.HTMLAttributes<HTMLDivElement>, 'color'> {
@@ -188,6 +190,10 @@ export declare interface DividerProps extends UniversalProps, Omit<default_2.HTM
     color?: SemanticColors | 'border';
     label?: string | default_2.ReactNode;
 }
+
+export declare type ElevationPreset = 'flat' | 'subtle' | 'high-contrast';
+
+export declare type FontScale = 'sm' | 'md' | 'lg';
 
 export declare const FullscreenControl: default_2.FC<FullscreenControlProps>;
 
@@ -200,6 +206,16 @@ export declare interface FullscreenControlProps {
     'aria-label'?: string;
     title?: string;
 }
+
+/**
+ * Generates a full 100–900 color ramp from a single base HEX color (set at step 500).
+ */
+export declare function generateColorRamp(hex: string): Record<number, string>;
+
+/**
+ * Computes an accessible focus ring box-shadow string from a HEX color.
+ */
+export declare function generateFocusRing(hex: string): string;
 
 export declare const GeolocateControl: default_2.FC<GeolocateControlProps>;
 
@@ -247,6 +263,27 @@ export declare interface GroupProps extends UniversalProps, default_2.HTMLAttrib
     wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
     grow?: boolean;
 }
+
+/**
+ * Converts a hex color code to HSL values.
+ */
+export declare function hexToHsl(hex: string): HSL;
+
+/**
+ * Parses a 3, 4, 6, or 8 digit hex color code into standard RGB (0-255).
+ */
+export declare function hexToRgb(hex: string): RGB;
+
+export declare interface HSL {
+    h: number;
+    s: number;
+    l: number;
+}
+
+/**
+ * Converts HSL values to a 6-digit hex string.
+ */
+export declare function hslToHex(h: number, s: number, l: number): string;
 
 export declare const IconButton: default_2.ForwardRefExoticComponent<IconButtonProps & default_2.RefAttributes<HTMLButtonElement>>;
 
@@ -345,7 +382,24 @@ export declare interface NumberInputProps extends UniversalProps, Omit<default_2
     onChange?: (value: number | undefined) => void;
 }
 
+export declare type RadiusPreset = 'sharp' | 'balanced' | 'rounded' | 'pill';
+
 export declare type RadiusScale = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+
+/**
+ * Pure TypeScript Color Calculation Utilities for sans-ui Dynamic Theming.
+ * Zero external runtime dependencies.
+ */
+export declare interface RGB {
+    r: number;
+    g: number;
+    b: number;
+}
+
+/**
+ * Converts RGB (0-255) to 6-digit uppercase hex string (e.g. "#00B5D9").
+ */
+export declare function rgbToHex(r: number, g: number, b: number): string;
 
 export declare const Select: default_2.ForwardRefExoticComponent<SelectProps & default_2.RefAttributes<HTMLButtonElement>>;
 
@@ -430,14 +484,36 @@ export declare interface TextProps extends UniversalProps, Omit<default_2.HTMLAt
 
 export declare type Theme = 'light' | 'dark';
 
+export declare interface ThemeColorsConfig {
+    primary?: string;
+    secondary?: string;
+}
+
+export declare interface ThemeConfig {
+    colors?: ThemeColorsConfig;
+    radius?: RadiusPreset;
+    elevation?: ElevationPreset;
+    density?: DensityMode;
+    fontScale?: FontScale;
+    fonts?: ThemeFonts;
+}
+
 export declare const ThemeContext: default_2.Context<ThemeContextValue | undefined>;
 
 export declare interface ThemeContextValue {
     theme: Theme;
     setTheme: (theme: Theme) => void;
     toggleTheme: () => void;
-    fonts?: ThemeFonts;
+    config: ThemeConfig;
+    setConfig: (updater: ThemeConfig | ((prev: ThemeConfig) => ThemeConfig)) => void;
+    setPrimaryColor: (hex: string) => void;
+    setSecondaryColor: (hex: string) => void;
+    setDensity: (density: DensityMode) => void;
+    setRadius: (radius: RadiusPreset) => void;
+    setElevation: (elevation: ElevationPreset) => void;
+    setFontScale: (fontScale: FontScale) => void;
     setFonts: (fonts: ThemeFonts | undefined) => void;
+    fonts?: ThemeFonts;
 }
 
 export declare interface ThemeFonts {
@@ -454,6 +530,7 @@ export declare interface ThemeProviderProps {
     storageKey?: string;
     targetElement?: HTMLElement | null;
     fonts?: ThemeFonts;
+    config?: ThemeConfig;
 }
 
 export declare const Title: default_2.ForwardRefExoticComponent<TitleProps & default_2.RefAttributes<HTMLHeadingElement>>;

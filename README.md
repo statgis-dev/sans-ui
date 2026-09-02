@@ -140,53 +140,81 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
 `sans-ui` leverages CSS custom properties scoped to `:root` and `[data-theme="dark"]`.
 
 ### ThemeProvider
-Manages theme switching, DOM attribute synchronization (`data-theme="light|dark"`), `localStorage` persistence, and dynamic CSS font family variable overrides.
+Manages theme switching, DOM attribute synchronization (`data-theme="light|dark"`), `localStorage` persistence, and full runtime design system token customization (Colors, Radius, Density, Elevation, Font Scale, and Font Families).
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `defaultTheme` | `'light' | 'dark'` | `'light'` | Initial theme fallback if no stored theme is found |
 | `storageKey` | `string` | `'sans-ui-theme'` | Key used in `localStorage` for theme persistence |
-| `targetElement` | `HTMLElement | null` | `document.documentElement` | Target DOM element where `data-theme` and font CSS variables are applied |
-| `fonts` | `ThemeFonts` | — | Custom typography font families override (`sans`, `display`, `mono`) |
+| `targetElement` | `HTMLElement | null` | `document.documentElement` | Target DOM element where `data-theme` and CSS variables are applied |
+| `config` | `ThemeConfig` | — | System token configuration (Colors, Radius, Density, Elevation, Font Scale, Fonts) |
+| `fonts` | `ThemeFonts` | — | Shorthand typography font families override |
 | `children` | `ReactNode` | — | App content |
 
 ```tsx
-import { ThemeProvider, type ThemeFonts } from 'sans-ui';
+import { ThemeProvider, type ThemeConfig } from 'sans-ui';
 
-const customFonts: ThemeFonts = {
-  sans: "'Inter', system-ui, sans-serif",
-  display: "'Inter', system-ui, sans-serif",
-  mono: "'JetBrains Mono', monospace",
+const customTheme: ThemeConfig = {
+  colors: {
+    primary: '#6366F1',   // Indigo - mathematically generates 100–900 ramp + focus ring
+    secondary: '#005F96',
+  },
+  radius: 'rounded',       // 'sharp' | 'balanced' | 'rounded' | 'pill'
+  density: 'comfortable',  // 'compact' | 'comfortable' | 'spacious'
+  elevation: 'subtle',     // 'flat' | 'subtle' | 'high-contrast'
+  fontScale: 'md',         // 'sm' (14px) | 'md' (16px) | 'lg' (18px)
+  fonts: {
+    sans: "'Inter', system-ui, sans-serif",
+    display: "'Inter', system-ui, sans-serif",
+    mono: "'JetBrains Mono', monospace",
+  },
 };
 
 function Root() {
   return (
-    <ThemeProvider defaultTheme="light" fonts={customFonts}>
+    <ThemeProvider defaultTheme="light" config={customTheme}>
       <App />
     </ThemeProvider>
   );
 }
 ```
 
-### useTheme Hook
-Returns the active theme, dynamic fonts, and helper functions to toggle themes or change fonts at runtime.
+### useTheme Hook & Runtime Customization
+Exposes active theme, configuration state, and real-time token modifier functions.
 
 ```tsx
 import { useTheme, Button } from 'sans-ui';
 
 function ThemeControls() {
-  const { theme, toggleTheme, fonts, setFonts } = useTheme();
+  const {
+    theme,
+    toggleTheme,
+    config,
+    setPrimaryColor,
+    setRadius,
+    setDensity,
+    setElevation,
+    setFontScale,
+    setFonts,
+    setConfig,
+  } = useTheme();
 
   return (
     <div>
-      <button onClick={toggleTheme}>Current theme: {theme}</button>
-      <button onClick={() => setFonts({ sans: "'Merriweather', serif" })}>
-        Switch to Serif
-      </button>
+      <Button onClick={() => setPrimaryColor('#10B981')}>Brand Emerald</Button>
+      <Button onClick={() => setRadius('pill')}>Pill Corners</Button>
+      <Button onClick={() => setDensity('compact')}>Compact Density</Button>
+      <Button onClick={() => setFontScale('lg')}>Large Typography</Button>
     </div>
   );
 }
 ```
+
+### Color Utilities (`colorUtils`)
+Lightweight pure TypeScript color engine (zero external dependencies):
+- `generateColorRamp(hex: string): Record<number, string>`: Takes a single HEX color and calculates mathematically accurate lightness steps for 100 through 900.
+- `generateFocusRing(hex: string): string`: Computes an accessible focus ring box-shadow: `0 0 0 3px rgba(r, g, b, 0.35)`.
+- `hexToHsl(hex)` & `hslToHex(h, s, l)`: Fast color space converters.
 
 ### Design Tokens Scales
 

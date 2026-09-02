@@ -11,6 +11,7 @@ import { FormsSection } from './sections/FormsSection';
 import { MediaSection } from './sections/MediaSection';
 import { OverlaysSection } from './sections/OverlaysSection';
 import { MapSection } from './sections/MapSection';
+import { ThemeCustomizerDrawer } from './components/ThemeCustomizerDrawer';
 
 type Tab = 'typography' | 'layout' | 'actions' | 'forms' | 'media' | 'overlays' | 'map';
 type Viewport = 'full' | 'tablet' | 'mobile';
@@ -183,6 +184,9 @@ export const App: React.FC = () => {
           sans-ui &copy; 2026. Built with TypeScript, CSS Modules, and Vite Library Mode.
         </Text>
       </footer>
+
+      {/* Floating Theme Customizer Drawer */}
+      <ThemeCustomizerDrawer />
     </div>
   );
 };

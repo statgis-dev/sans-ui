@@ -11,7 +11,6 @@ import { FormsSection } from './sections/FormsSection';
 import { MediaSection } from './sections/MediaSection';
 import { OverlaysSection } from './sections/OverlaysSection';
 import { MapSection } from './sections/MapSection';
-import { ThemeCustomizerDrawer } from './components/ThemeCustomizerDrawer';
 
 type Tab = 'typography' | 'layout' | 'actions' | 'forms' | 'media' | 'overlays' | 'map';
 type Viewport = 'full' | 'tablet' | 'mobile';
@@ -21,39 +20,39 @@ const FONT_PRESETS: Array<{
   name: string;
   fonts?: ThemeFonts;
 }> = [
-  {
-    id: 'default',
-    name: 'Default (Lato / Poppins)',
-    fonts: undefined,
-  },
-  {
-    id: 'system',
-    name: 'System UI (Inter / Roboto)',
-    fonts: {
-      sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-      display: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-      mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    {
+      id: 'default',
+      name: 'Default (Lato / Poppins)',
+      fonts: undefined,
     },
-  },
-  {
-    id: 'editorial',
-    name: 'Editorial (Merriweather / Serif)',
-    fonts: {
-      sans: "'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif",
-      display: "'Playfair Display', Georgia, 'Times New Roman', serif",
-      mono: "'JetBrains Mono', monospace",
+    {
+      id: 'system',
+      name: 'System UI (Inter / Roboto)',
+      fonts: {
+        sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        display: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      },
     },
-  },
-  {
-    id: 'accessible',
-    name: 'Accessible (Atkinson / Clean)',
-    fonts: {
-      sans: "'Atkinson Hyperlegible', 'Trebuchet MS', 'Segoe UI', sans-serif",
-      display: "'Atkinson Hyperlegible', 'Trebuchet MS', 'Segoe UI', sans-serif",
-      mono: "'JetBrains Mono', monospace",
+    {
+      id: 'editorial',
+      name: 'Editorial (Merriweather / Serif)',
+      fonts: {
+        sans: "'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif",
+        display: "'Playfair Display', Georgia, 'Times New Roman', serif",
+        mono: "'JetBrains Mono', monospace",
+      },
     },
-  },
-];
+    {
+      id: 'accessible',
+      name: 'Accessible (Atkinson / Clean)',
+      fonts: {
+        sans: "'Atkinson Hyperlegible', 'Trebuchet MS', 'Segoe UI', sans-serif",
+        display: "'Atkinson Hyperlegible', 'Trebuchet MS', 'Segoe UI', sans-serif",
+        mono: "'JetBrains Mono', monospace",
+      },
+    },
+  ];
 
 export const App: React.FC = () => {
   const { theme, toggleTheme, setFonts } = useTheme();
@@ -184,9 +183,6 @@ export const App: React.FC = () => {
           sans-ui &copy; 2026. Built with TypeScript, CSS Modules, and Vite Library Mode.
         </Text>
       </footer>
-
-      {/* Floating Theme Customizer Drawer */}
-      <ThemeCustomizerDrawer />
     </div>
   );
 };

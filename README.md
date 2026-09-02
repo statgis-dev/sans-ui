@@ -135,28 +135,24 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
 
 ---
 
-## Theme Engine & Tokens
+## Theme Engine & System Customization (`ThemeConfig`)
 
-`sans-ui` leverages CSS custom properties scoped to `:root` and `[data-theme="dark"]`.
+`sans-ui` features a dynamic, zero-runtime-overhead theming engine powered by standard CSS Custom Properties (`var(--...)`). Consuming applications can customize the entire design system either statically at initialization via `ThemeProvider` props or dynamically at runtime using the `useTheme` hook.
 
-### ThemeProvider
-Manages theme switching, DOM attribute synchronization (`data-theme="light|dark"`), `localStorage` persistence, and full runtime design system token customization (Colors, Radius, Density, Elevation, Font Scale, and Font Families).
+---
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `defaultTheme` | `'light' | 'dark'` | `'light'` | Initial theme fallback if no stored theme is found |
-| `storageKey` | `string` | `'sans-ui-theme'` | Key used in `localStorage` for theme persistence |
-| `targetElement` | `HTMLElement | null` | `document.documentElement` | Target DOM element where `data-theme` and CSS variables are applied |
-| `config` | `ThemeConfig` | — | System token configuration (Colors, Radius, Density, Elevation, Font Scale, Fonts) |
-| `fonts` | `ThemeFonts` | — | Shorthand typography font families override |
-| `children` | `ReactNode` | — | App content |
+### 1. `ThemeProvider` Setup
+
+Wrap your application tree in `ThemeProvider` and pass a `config` object to customize colors, radii, density, elevation, typography scales, and fonts:
 
 ```tsx
+import React from 'react';
 import { ThemeProvider, type ThemeConfig } from 'sans-ui';
+import 'sans-ui/style.css';
 
 const customTheme: ThemeConfig = {
   colors: {
-    primary: '#6366F1',   // Indigo - mathematically generates 100–900 ramp + focus ring
+    primary: '#6366F1',   // Indigo brand color - auto-generates 100-900 ramp + focus ring
     secondary: '#005F96',
   },
   radius: 'rounded',       // 'sharp' | 'balanced' | 'rounded' | 'pill'
@@ -164,13 +160,13 @@ const customTheme: ThemeConfig = {
   elevation: 'subtle',     // 'flat' | 'subtle' | 'high-contrast'
   fontScale: 'md',         // 'sm' (14px) | 'md' (16px) | 'lg' (18px)
   fonts: {
-    sans: "'Inter', system-ui, sans-serif",
-    display: "'Inter', system-ui, sans-serif",
+    sans: "'Inter', system-ui, -apple-system, sans-serif",
+    display: "'Inter', system-ui, -apple-system, sans-serif",
     mono: "'JetBrains Mono', monospace",
   },
 };
 
-function Root() {
+export function Root() {
   return (
     <ThemeProvider defaultTheme="light" config={customTheme}>
       <App />
@@ -179,50 +175,183 @@ function Root() {
 }
 ```
 
-### useTheme Hook & Runtime Customization
-Exposes active theme, configuration state, and real-time token modifier functions.
+#### `ThemeProvider` Props Reference
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `defaultTheme` | `'light' | 'dark'` | `'light'` | Initial theme fallback if no stored theme is found in `localStorage`. |
+| `storageKey` | `string` | `'sans-ui-theme'` | Key used in `localStorage` for light/dark theme persistence. |
+| `targetElement` | `HTMLElement | null` | `document.documentElement` | Target DOM element where `data-theme` and CSS variables are injected. |
+| `config` | `ThemeConfig` | — | Complete system token customization object. |
+| `fonts` | `ThemeFonts` | — | Shorthand typography font families override (alternative to `config.fonts`). |
+| `children` | `ReactNode` | — | Child component tree. |
+
+---
+
+### 2. Detailed `ThemeConfig` Options Breakdown
+
+The `ThemeConfig` interface controls all visual and structural aspects of `sans-ui`:
+
+```ts
+export interface ThemeConfig {
+  colors?: ThemeColorsConfig;
+  radius?: RadiusPreset;
+  elevation?: ElevationPreset;
+  density?: DensityMode;
+  fontScale?: FontScale;
+  fonts?: ThemeFonts;
+}
+```
+
+---
+
+#### A. `colors` (`ThemeColorsConfig`)
+Allows setting brand colors using standard HEX strings. `sans-ui` mathematically generates a 9-step luminance ramp (100–900) plus an accessible focus ring:
+
+```ts
+export interface ThemeColorsConfig {
+  primary?: string;   // Single HEX code (e.g. "#00B5D9" or "#6366F1")
+  secondary?: string; // Single HEX code (e.g. "#005F96" or "#EC4899")
+}
+```
+
+* **Primary Ramp Generation (`colors.primary`):**
+  When a HEX code is provided, `generateColorRamp(hex)` maps it to step `500` and computes:
+  * `--color-primary-100`: Ultra-light tint for subtle badges, light buttons, and active middle ranges.
+  * `--color-primary-200` & `--color-primary-300`: Soft fills for hover states and selection backgrounds.
+  * `--color-primary-500`: Base brand color for primary filled buttons, switches, active date indicators, and badges.
+  * `--color-primary-600` & `--color-primary-700`: Darker shades for hover and active pressed states.
+  * `--color-primary-800` & `--color-primary-900`: Deep contrast tones.
+  * `--border-focus` & `--shadow-focus`: Semi-transparent focus ring (`0 0 0 3px rgba(r, g, b, 0.35)`) guaranteeing WCAG 2.1 compliance.
+* **Secondary Ramp Generation (`colors.secondary`):**
+  Injects `--color-secondary-100` through `--color-secondary-900`.
+
+---
+
+#### B. `radius` (`RadiusPreset`)
+Controls the global corner curvature across buttons, text fields, selects, date pickers, cards, badges, and modals:
+
+| Preset | Description | Sample Token Values | Best For |
+| :--- | :--- | :--- | :--- |
+| **`'sharp'`** | Zero/minimal rounding for strict, compact rectangular interfaces. | `--radius-xs: 0px`<br>`--radius-sm: 2px`<br>`--radius-md: 4px`<br>`--radius-lg: 6px` | IDEs, financial terminals, dense tables, brutalist UI. |
+| **`'balanced'`** *(Default)* | Subtle, modern curvature. | `--radius-xs: 4px`<br>`--radius-sm: 6px`<br>`--radius-md: 10px`<br>`--radius-lg: 16px` | Enterprise SaaS, dashboards, administrative portals. |
+| **`'rounded'`** | Friendly, soft rounded corners with prominent visual curves. | `--radius-xs: 6px`<br>`--radius-sm: 10px`<br>`--radius-md: 16px`<br>`--radius-lg: 24px` | Consumer web apps, mobile-first designs, marketing tools. |
+| **`'pill'`** | Fully rounded capsule/pill shape for buttons and inputs. | `--radius-xs: 4px`<br>`--radius-sm: 9999px`<br>`--radius-md: 9999px`<br>`--radius-lg: 20px` | Social apps, creative suites, conversational interfaces. |
+
+---
+
+#### C. `density` (`DensityMode`)
+Modulates the baseline padding and layout spacing scale (`--spacing-*`) across containers, stacks, groups, and form fields:
+
+| Mode | Token Multipliers | Baseline Gap / Padding | Use Case |
+| :--- | :--- | :--- | :--- |
+| **`'compact'`** | Scaled down by ~50% | `--spacing-xs: 2px`<br>`--spacing-sm: 4px`<br>`--spacing-md: 8px`<br>`--spacing-lg: 16px` | High-density spreadsheets, sidebars, data-heavy views. |
+| **`'comfortable'`** *(Default)* | Standard ergonomic baseline | `--spacing-xs: 4px`<br>`--spacing-sm: 8px`<br>`--spacing-md: 16px`<br>`--spacing-lg: 24px` | Standard web applications, forms, content management. |
+| **`'spacious'`** | Scaled up by ~50% | `--spacing-xs: 6px`<br>`--spacing-sm: 12px`<br>`--spacing-md: 24px`<br>`--spacing-lg: 36px` | Marketing pages, touch tablets, presentation views. |
+
+---
+
+#### D. `elevation` (`ElevationPreset`)
+Adjusts depth perception and multi-layer box shadows (`--shadow-*`):
+
+| Preset | Shadow Multiplier | Visual Behavior |
+| :--- | :--- | :--- |
+| **`'flat'`** | `none` | Strips all box-shadows (`--shadow-xs` through `--shadow-xl: none`). Renders pure flat 2D surfaces with crisp 1px borders. |
+| **`'subtle'`** *(Default)* | Multi-layer ambient | Soft ambient diffusion with gentle low-contrast shadows for natural depth. |
+| **`'high-contrast'`** | Deep opacity & offset | Increased shadow opacity and vertical displacement for sharp elevation separation over busy backgrounds. |
+
+---
+
+#### E. `fontScale` (`FontScale`)
+Adjusts the root typography size tokens across all modular text steps (`--font-size-*`) and headings (`--font-size-h1` to `h6`):
+
+| Scale | Base Body Size (`--font-size-md`) | Heading 1 (`--font-size-h1`) | Small Text (`--font-size-xs`) |
+| :--- | :--- | :--- | :--- |
+| **`'sm'`** | **`0.875rem` (14px)** | `2.5rem` (40px) | `0.6875rem` (11px) |
+| **`'md'`** *(Default)* | **`1rem` (16px)** | `3rem` (48px) | `0.75rem` (12px) |
+| **`'lg'`** | **`1.125rem` (18px)** | `3.5rem` (56px) | `0.8125rem` (13px) |
+
+---
+
+#### F. `fonts` (`ThemeFonts`)
+Customizes font family variables for sans, display, and monospaced text:
+
+```ts
+export interface ThemeFonts {
+  sans?: string;    // Injects into --font-sans (Body text, buttons, inputs)
+  display?: string; // Injects into --font-display (Headings, titles, banners)
+  mono?: string;    // Injects into --font-mono (Code snippets, numeric inputs, badges)
+}
+```
+
+---
+
+### 3. Runtime Customization via `useTheme()`
+
+The `useTheme()` hook provides real-time getters and setters to update the design system dynamically without page reloads:
 
 ```tsx
-import { useTheme, Button } from 'sans-ui';
+import { useTheme, Button, Group } from 'sans-ui';
 
-function ThemeControls() {
+function ThemeSettingsPanel() {
   const {
-    theme,
-    toggleTheme,
-    config,
-    setPrimaryColor,
-    setRadius,
-    setDensity,
-    setElevation,
-    setFontScale,
-    setFonts,
-    setConfig,
+    theme,              // 'light' | 'dark'
+    toggleTheme,        // () => void
+    config,             // Active ThemeConfig object
+    setPrimaryColor,    // (hex: string) => void
+    setSecondaryColor,  // (hex: string) => void
+    setRadius,          // (radius: 'sharp' | 'balanced' | 'rounded' | 'pill') => void
+    setDensity,         // (density: 'compact' | 'comfortable' | 'spacious') => void
+    setElevation,       // (elevation: 'flat' | 'subtle' | 'high-contrast') => void
+    setFontScale,       // (scale: 'sm' | 'md' | 'lg') => void
+    setFonts,           // (fonts: ThemeFonts | undefined) => void
+    setConfig,          // (updater: ThemeConfig | ((prev) => ThemeConfig)) => void
   } = useTheme();
 
   return (
-    <div>
-      <Button onClick={() => setPrimaryColor('#10B981')}>Brand Emerald</Button>
-      <Button onClick={() => setRadius('pill')}>Pill Corners</Button>
-      <Button onClick={() => setDensity('compact')}>Compact Density</Button>
-      <Button onClick={() => setFontScale('lg')}>Large Typography</Button>
-    </div>
+    <Group gap="sm">
+      {/* Dynamic Brand Color Swapping */}
+      <Button onClick={() => setPrimaryColor('#10B981')}>Emerald Brand</Button>
+      <Button onClick={() => setPrimaryColor('#6366F1')}>Indigo Brand</Button>
+
+      {/* Geometry and Density Toggles */}
+      <Button onClick={() => setRadius('pill')}>Pill Style</Button>
+      <Button onClick={() => setDensity('compact')}>Compact UI</Button>
+
+      {/* Font Scale Toggle */}
+      <Button onClick={() => setFontScale('lg')}>Large Fonts</Button>
+    </Group>
   );
 }
 ```
 
-### Color Utilities (`colorUtils`)
-Lightweight pure TypeScript color engine (zero external dependencies):
-- `generateColorRamp(hex: string): Record<number, string>`: Takes a single HEX color and calculates mathematically accurate lightness steps for 100 through 900.
-- `generateFocusRing(hex: string): string`: Computes an accessible focus ring box-shadow: `0 0 0 3px rgba(r, g, b, 0.35)`.
-- `hexToHsl(hex)` & `hslToHex(h, s, l)`: Fast color space converters.
+---
 
-### Design Tokens Scales
+### 4. Pure Color Utilities (`colorUtils`)
+
+`sans-ui` exports zero-dependency color mathematics utilities:
 
 ```ts
-export type SizeScale = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type SpacingScale = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-export type RadiusScale = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
-export type SemanticColors = 'primary' | 'secondary' | 'neutral' | 'success' | 'warning' | 'danger' | 'info';
+import {
+  generateColorRamp,
+  generateFocusRing,
+  hexToHsl,
+  hslToHex,
+  hexToRgb,
+  rgbToHex,
+} from 'sans-ui';
+
+// 1. Generate full 100-900 color ramp
+const ramp = generateColorRamp('#6366F1');
+// { 100: '#F5F5FE', 200: '#E4E5FC', ..., 500: '#6366F1', ..., 900: '#141757' }
+
+// 2. Compute accessible focus ring string
+const focusRing = generateFocusRing('#6366F1');
+// "0 0 0 3px rgba(99, 102, 241, 0.35)"
+
+// 3. Color space conversion
+const hsl = hexToHsl('#6366F1'); // { h: 239, s: 84, l: 67 }
+const hex = hslToHex(239, 84, 67); // "#6366F1"
 ```
 
 ---

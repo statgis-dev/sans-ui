@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { Title, Text, Button, IconButton, Badge, Group, Stack, Box } from '../index';
-import { useTheme } from '../theme';
+import { Title, Text, Button, IconButton, Badge, Group, Stack, Box, Select } from '../index';
+import { useTheme, type ThemeFonts } from '../theme';
 import styles from './App.module.css';
 
 import { TypographySection } from './sections/TypographySection';
@@ -15,10 +15,57 @@ import { MapSection } from './sections/MapSection';
 type Tab = 'typography' | 'layout' | 'actions' | 'forms' | 'media' | 'overlays' | 'map';
 type Viewport = 'full' | 'tablet' | 'mobile';
 
+const FONT_PRESETS: Array<{
+  id: string;
+  name: string;
+  fonts?: ThemeFonts;
+}> = [
+  {
+    id: 'default',
+    name: 'Default (Lato / Poppins)',
+    fonts: undefined,
+  },
+  {
+    id: 'system',
+    name: 'System UI (Inter / Roboto)',
+    fonts: {
+      sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+      display: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    },
+  },
+  {
+    id: 'editorial',
+    name: 'Editorial (Merriweather / Serif)',
+    fonts: {
+      sans: "'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif",
+      display: "'Playfair Display', Georgia, 'Times New Roman', serif",
+      mono: "'JetBrains Mono', monospace",
+    },
+  },
+  {
+    id: 'accessible',
+    name: 'Accessible (Atkinson / Clean)',
+    fonts: {
+      sans: "'Atkinson Hyperlegible', 'Trebuchet MS', 'Segoe UI', sans-serif",
+      display: "'Atkinson Hyperlegible', 'Trebuchet MS', 'Segoe UI', sans-serif",
+      mono: "'JetBrains Mono', monospace",
+    },
+  },
+];
+
 export const App: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, setFonts } = useTheme();
   const [activeTab, setActiveTab] = useState<Tab>('typography');
   const [viewport, setViewport] = useState<Viewport>('full');
+  const [activeFontPreset, setActiveFontPreset] = useState<string>('default');
+
+  const handleFontChange = (presetId: string | null) => {
+    if (!presetId) return;
+    setActiveFontPreset(presetId);
+    const selected = FONT_PRESETS.find((p) => p.id === presetId);
+    setFonts(selected?.fonts);
+  };
 
   const sunIcon = (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -81,8 +128,19 @@ export const App: React.FC = () => {
             </button>
           </nav>
 
-          {/* Controls: Viewport + Theme Switcher */}
-          <Group gap="xs" align="center">
+          {/* Controls: Font Selector + Viewport + Theme Switcher */}
+          <Group gap="sm" align="center">
+            {/* Font Preset Selector */}
+            <div style={{ width: 200 }}>
+              <Select
+                size="xs"
+                data={FONT_PRESETS.map((p) => ({ label: p.name, value: p.id }))}
+                value={activeFontPreset}
+                onChange={handleFontChange}
+                placeholder="Font Family..."
+              />
+            </div>
+
             <Group gap="xs">
               <Badge variant={viewport === 'full' ? 'filled' : 'outline'} color="neutral" style={{ cursor: 'pointer' }} onClick={() => setViewport('full')}>
                 Desktop

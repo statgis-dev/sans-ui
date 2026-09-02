@@ -140,28 +140,50 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
 `sans-ui` leverages CSS custom properties scoped to `:root` and `[data-theme="dark"]`.
 
 ### ThemeProvider
-Manages theme switching, DOM attribute synchronization (`data-theme="light|dark"`), and `localStorage` persistence.
+Manages theme switching, DOM attribute synchronization (`data-theme="light|dark"`), `localStorage` persistence, and dynamic CSS font family variable overrides.
 
 | Prop | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `defaultTheme` | `'light' | 'dark'` | `'light'` | Initial theme fallback if no stored theme is found |
 | `storageKey` | `string` | `'sans-ui-theme'` | Key used in `localStorage` for theme persistence |
-| `targetElement` | `HTMLElement | null` | `document.documentElement` | Target DOM element where `data-theme` is applied |
+| `targetElement` | `HTMLElement | null` | `document.documentElement` | Target DOM element where `data-theme` and font CSS variables are applied |
+| `fonts` | `ThemeFonts` | — | Custom typography font families override (`sans`, `display`, `mono`) |
 | `children` | `ReactNode` | — | App content |
 
+```tsx
+import { ThemeProvider, type ThemeFonts } from 'sans-ui';
+
+const customFonts: ThemeFonts = {
+  sans: "'Inter', system-ui, sans-serif",
+  display: "'Inter', system-ui, sans-serif",
+  mono: "'JetBrains Mono', monospace",
+};
+
+function Root() {
+  return (
+    <ThemeProvider defaultTheme="light" fonts={customFonts}>
+      <App />
+    </ThemeProvider>
+  );
+}
+```
+
 ### useTheme Hook
-Returns the active theme and helper functions to toggle or set the theme.
+Returns the active theme, dynamic fonts, and helper functions to toggle themes or change fonts at runtime.
 
 ```tsx
-import { useTheme, IconButton } from 'sans-ui';
+import { useTheme, Button } from 'sans-ui';
 
-function ThemeSwitcher() {
-  const { theme, toggleTheme, setTheme } = useTheme();
+function ThemeControls() {
+  const { theme, toggleTheme, fonts, setFonts } = useTheme();
 
   return (
-    <button onClick={toggleTheme}>
-      Active theme: {theme}
-    </button>
+    <div>
+      <button onClick={toggleTheme}>Current theme: {theme}</button>
+      <button onClick={() => setFonts({ sans: "'Merriweather', serif" })}>
+        Switch to Serif
+      </button>
+    </div>
   );
 }
 ```

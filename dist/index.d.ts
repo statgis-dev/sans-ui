@@ -436,6 +436,14 @@ export declare interface ThemeContextValue {
     theme: Theme;
     setTheme: (theme: Theme) => void;
     toggleTheme: () => void;
+    fonts?: ThemeFonts;
+    setFonts: (fonts: ThemeFonts | undefined) => void;
+}
+
+export declare interface ThemeFonts {
+    sans?: string;
+    display?: string;
+    mono?: string;
 }
 
 export declare const ThemeProvider: default_2.FC<ThemeProviderProps>;
@@ -445,6 +453,7 @@ export declare interface ThemeProviderProps {
     defaultTheme?: Theme;
     storageKey?: string;
     targetElement?: HTMLElement | null;
+    fonts?: ThemeFonts;
 }
 
 export declare const Title: default_2.ForwardRefExoticComponent<TitleProps & default_2.RefAttributes<HTMLHeadingElement>>;

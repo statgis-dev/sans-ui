@@ -64,7 +64,7 @@ export const App: React.FC = () => {
     if (!presetId) return;
     setActiveFontPreset(presetId);
     const selected = FONT_PRESETS.find((p) => p.id === presetId);
-    setFonts(selected?.fonts);
+    // setFonts(selected?.fonts);
   };
 
   const sunIcon = (
@@ -99,7 +99,7 @@ export const App: React.FC = () => {
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.logoArea}>
-            <Title order={1} size="h3" color="primary">sans-ui</Title>
+            <Title order={1} size="h3" color="primary">Origo</Title>
             <Badge variant="dot" color="success">v0.1.0 Ready</Badge>
           </div>
 

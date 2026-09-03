@@ -4,15 +4,21 @@ import { ThemeProvider, type ThemeConfig } from '../theme';
 import '../theme/theme.css';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { App } from './App';
+import '@fontsource/montserrat';
+import '@fontsource/andada-pro';
+import '@fontsource/slabo-13px';
 
 const customTheme: ThemeConfig = {
   radius: "sharp",
   density: "compact",
   elevation: "high-contrast",
-  fontScale: "sm",
   colors: {
-    primary: "#D4AF37",
-    secondary: "#FFC5D3",
+    primary: "#023e8a",
+    secondary: "#f75590",
+  },
+  fonts: {
+    sans: "'Slabo 13px'",
+    display: "'Andada Pro'",
   }
 }
 

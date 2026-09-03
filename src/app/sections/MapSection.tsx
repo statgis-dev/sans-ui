@@ -20,9 +20,33 @@ import {
   MapControlWrapper,
 } from '../../components/map';
 
-// OpenStreetMap Official Vector Tile Styles via OpenFreeMap (Fast, Open, Zero API Key)
-const OSM_VECTOR_STYLE = 'https://tiles.openfreemap.org/styles/bright';
+// 1. CARTO Voyager Vector Basemap (Powered by OpenStreetMap data, high reliability, zero API key)
+const OSM_VECTOR_STYLE = 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json';
 
+// 2. OpenStreetMap Standard Raster Basemap (Direct OSM tile servers)
+const OSM_STANDARD_RASTER_STYLE = {
+  version: 8 as const,
+  sources: {
+    'osm-tiles': {
+      type: 'raster' as const,
+      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+      tileSize: 256,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxzoom: 19,
+    },
+  },
+  layers: [
+    {
+      id: 'osm-tiles-layer',
+      type: 'raster' as const,
+      source: 'osm-tiles',
+      minzoom: 0,
+      maxzoom: 19,
+    },
+  ],
+};
+
+// 3. Esri World Imagery Satellite Raster Basemap
 const SATELLITE_STYLE = {
   version: 8 as const,
   sources: {
@@ -33,6 +57,7 @@ const SATELLITE_STYLE = {
       ],
       tileSize: 256,
       attribution: 'Tiles &copy; Esri',
+      maxzoom: 19,
     },
   },
   layers: [
@@ -46,6 +71,8 @@ const SATELLITE_STYLE = {
   ],
 };
 
+type BasemapMode = 'vector' | 'satellite' | 'osm-raster';
+
 const PRESETS = [
   { name: 'New York', center: [-74.006, 40.7128] as [number, number], zoom: 12, pitch: 45, bearing: -20 },
   { name: 'London', center: [-0.1278, 51.5074] as [number, number], zoom: 12, pitch: 30, bearing: 15 },
@@ -58,7 +85,8 @@ export const MapSection: React.FC = () => {
   const mapRef = useRef<MapRef>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [basemapType, setBasemapType] = useState<'vector' | 'satellite'>('vector');
+  const [basemapMode, setBasemapMode] = useState<BasemapMode>('vector');
+  const [mapError, setMapError] = useState<string | null>(null);
   const [viewState, setViewState] = useState({
     longitude: -74.006,
     latitude: 40.7128,
@@ -74,7 +102,7 @@ export const MapSection: React.FC = () => {
   }, []);
 
   const toggleBasemap = () => {
-    setBasemapType((prev) => (prev === 'vector' ? 'satellite' : 'vector'));
+    setBasemapMode((prev) => (prev === 'vector' ? 'satellite' : 'vector'));
   };
 
   const flyToPreset = (preset: typeof PRESETS[0]) => {
@@ -87,20 +115,35 @@ export const MapSection: React.FC = () => {
     });
   };
 
+  // Resolve current active MapLibre style
+  const activeMapStyle =
+    basemapMode === 'vector'
+      ? OSM_VECTOR_STYLE
+      : basemapMode === 'satellite'
+      ? SATELLITE_STYLE
+      : OSM_STANDARD_RASTER_STYLE;
+
   return (
     <Stack gap="lg">
       <Card withBorder shadow="sm">
         <Card.Header>
           <Group justify="space-between" align="center" wrap="wrap">
             <div>
-              <Title order={3} size="h4">OpenStreetMap Vector Controls</Title>
+              <Title order={3} size="h4">Map Control Widgets</Title>
               <Text size="sm" color="dimmed">
-                Modular, accessible MapLibre GL controls rendered over OpenStreetMap (OSM) vector tiles.
+                Modular, accessible MapLibre GL controls rendered over OpenStreetMap (OSM) vector & satellite tiles.
               </Text>
             </div>
             <Group gap="xs">
-              <Badge variant="filled" color={basemapType === 'vector' ? 'primary' : 'success'}>
-                {basemapType === 'vector' ? 'OSM VECTOR BASEMAP' : 'SATELLITE IMAGERY'}
+              <Badge
+                variant="filled"
+                color={basemapMode === 'vector' ? 'primary' : basemapMode === 'satellite' ? 'success' : 'warning'}
+              >
+                {basemapMode === 'vector'
+                  ? 'OSM VOYAGER VECTOR'
+                  : basemapMode === 'satellite'
+                  ? 'ESRI SATELLITE'
+                  : 'OSM STANDARD RASTER'}
               </Badge>
               <Badge variant="light" color="neutral">
                 Zoom: {viewState.zoom.toFixed(1)}
@@ -139,16 +182,24 @@ export const MapSection: React.FC = () => {
                   pitch: 0,
                   bearing: 0,
                 }}
-                mapStyle={basemapType === 'vector' ? OSM_VECTOR_STYLE : SATELLITE_STYLE}
+                mapStyle={activeMapStyle}
                 onMove={handleMove}
                 attributionControl={false}
+                onError={(e) => {
+                  console.error('[MapLibre Error]:', e.error);
+                  setMapError(e.error?.message || 'Map tile or style loading error');
+                }}
+                onLoad={() => {
+                  console.log('[MapLibre]: Map loaded successfully');
+                  setMapError(null);
+                }}
                 style={{ width: '100%', height: '100%' }}
               >
                 {/* Top-Right Floating Controls Overlay */}
                 <MapControlWrapper position="top-right" gap="sm">
                   <FullscreenControl containerRef={containerRef} />
                   <BasemapToggleControl
-                    currentBasemap={basemapType}
+                    currentBasemap={basemapMode === 'satellite' ? 'satellite' : 'vector'}
                     onToggle={toggleBasemap}
                   />
                   <DefaultViewControl
@@ -172,18 +223,62 @@ export const MapSection: React.FC = () => {
               </Map>
             </div>
 
+            {/* Error Diagnostics Box */}
+            {mapError && (
+              <Box bg="danger" padding="sm" radius="md" border>
+                <Group justify="space-between" align="center">
+                  <Text size="xs" color="danger">
+                    <strong>Map Diagnostics:</strong> {mapError}
+                  </Text>
+                  <Button size="xs" variant="outline" color="danger" onClick={() => setBasemapMode('osm-raster')}>
+                    Switch to OSM Raster Fallback
+                  </Button>
+                </Group>
+              </Box>
+            )}
+
             {geolocateStatus && (
               <Box bg="app" padding="sm" radius="md" border>
                 <Text size="xs" color="dimmed">{geolocateStatus}</Text>
               </Box>
             )}
 
-            {/* Quick Camera Presets */}
-            <Stack gap="xs">
-              <Text size="xs" weight={600} color="dimmed" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Camera FlyTo Presets & Gestures
-              </Text>
-              <Group gap="xs" wrap="wrap">
+            {/* Basemap Switcher Pills & Camera Presets */}
+            <Group justify="space-between" align="center" wrap="wrap">
+              <Group gap="xs" align="center">
+                <Text size="xs" weight={600} color="dimmed" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Basemap Layers:
+                </Text>
+                <Button
+                  size="xs"
+                  variant={basemapMode === 'vector' ? 'filled' : 'outline'}
+                  color={basemapMode === 'vector' ? 'primary' : 'neutral'}
+                  onClick={() => setBasemapMode('vector')}
+                >
+                  OSM Vector (Voyager)
+                </Button>
+                <Button
+                  size="xs"
+                  variant={basemapMode === 'satellite' ? 'filled' : 'outline'}
+                  color={basemapMode === 'satellite' ? 'primary' : 'neutral'}
+                  onClick={() => setBasemapMode('satellite')}
+                >
+                  Esri Satellite
+                </Button>
+                <Button
+                  size="xs"
+                  variant={basemapMode === 'osm-raster' ? 'filled' : 'outline'}
+                  color={basemapMode === 'osm-raster' ? 'primary' : 'neutral'}
+                  onClick={() => setBasemapMode('osm-raster')}
+                >
+                  OSM Standard (Raster)
+                </Button>
+              </Group>
+
+              <Group gap="xs" align="center">
+                <Text size="xs" weight={600} color="dimmed" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  FlyTo:
+                </Text>
                 {PRESETS.map((p) => (
                   <Button
                     key={p.name}
@@ -196,14 +291,14 @@ export const MapSection: React.FC = () => {
                   </Button>
                 ))}
               </Group>
-            </Stack>
+            </Group>
           </Stack>
         </Card.Body>
 
         <Card.Footer>
           <Group justify="space-between" align="center">
             <Text size="xs" color="dimmed">
-              Controls: Click Compass to reset North &bull; Drag Compass or hold Right-Click to tilt & rotate &bull; Scroll to Zoom
+              Controls: Click Compass to reset North &bull; Drag Compass needle or hold Right-Click to tilt & rotate &bull; Scroll to Zoom
             </Text>
             <Button
               variant="outline"
@@ -211,7 +306,7 @@ export const MapSection: React.FC = () => {
               color="primary"
               onClick={toggleBasemap}
             >
-              Switch to {basemapType === 'vector' ? 'Satellite Imagery' : 'OpenStreetMap Vector'}
+              Switch to {basemapMode === 'vector' ? 'Satellite Imagery' : 'OSM Vector Map'}
             </Button>
           </Group>
         </Card.Footer>

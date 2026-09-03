@@ -129,40 +129,6 @@ export const App: React.FC = () => {
           </nav>
 
           {/* Controls: Font Selector + Viewport + Theme Switcher */}
-          <Group gap="sm" align="center">
-            {/* Font Preset Selector */}
-            <div style={{ width: 200 }}>
-              <Select
-                size="xs"
-                data={FONT_PRESETS.map((p) => ({ label: p.name, value: p.id }))}
-                value={activeFontPreset}
-                onChange={handleFontChange}
-                placeholder="Font Family..."
-              />
-            </div>
-
-            <Group gap="xs">
-              <Badge variant={viewport === 'full' ? 'filled' : 'outline'} color="neutral" style={{ cursor: 'pointer' }} onClick={() => setViewport('full')}>
-                Desktop
-              </Badge>
-              <Badge variant={viewport === 'tablet' ? 'filled' : 'outline'} color="neutral" style={{ cursor: 'pointer' }} onClick={() => setViewport('tablet')}>
-                768px
-              </Badge>
-              <Badge variant={viewport === 'mobile' ? 'filled' : 'outline'} color="neutral" style={{ cursor: 'pointer' }} onClick={() => setViewport('mobile')}>
-                375px
-              </Badge>
-            </Group>
-
-            <IconButton
-              icon={theme === 'dark' ? sunIcon : moonIcon}
-              aria-label="Toggle light and dark theme"
-              variant="subtle"
-              color="neutral"
-              radius="full"
-              size="md"
-              onClick={toggleTheme}
-            />
-          </Group>
         </div>
       </header>
 

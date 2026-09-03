@@ -20,7 +20,8 @@ import {
   MapControlWrapper,
 } from '../../components/map';
 
-const VECTOR_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
+// OpenStreetMap Official Vector Tile Styles via OpenFreeMap (Fast, Open, Zero API Key)
+const OSM_VECTOR_STYLE = 'https://tiles.openfreemap.org/styles/bright';
 
 const SATELLITE_STYLE = {
   version: 8 as const,
@@ -92,14 +93,14 @@ export const MapSection: React.FC = () => {
         <Card.Header>
           <Group justify="space-between" align="center" wrap="wrap">
             <div>
-              <Title order={3} size="h4">Map Control Widgets</Title>
+              <Title order={3} size="h4">OpenStreetMap Vector Controls</Title>
               <Text size="sm" color="dimmed">
-                Modular, accessible MapLibre GL controls styled with sans-ui components.
+                Modular, accessible MapLibre GL controls rendered over OpenStreetMap (OSM) vector tiles.
               </Text>
             </div>
             <Group gap="xs">
               <Badge variant="filled" color={basemapType === 'vector' ? 'primary' : 'success'}>
-                {basemapType.toUpperCase()} BASEMAP
+                {basemapType === 'vector' ? 'OSM VECTOR BASEMAP' : 'SATELLITE IMAGERY'}
               </Badge>
               <Badge variant="light" color="neutral">
                 Zoom: {viewState.zoom.toFixed(1)}
@@ -138,7 +139,7 @@ export const MapSection: React.FC = () => {
                   pitch: 0,
                   bearing: 0,
                 }}
-                mapStyle={basemapType === 'vector' ? VECTOR_STYLE : SATELLITE_STYLE}
+                mapStyle={basemapType === 'vector' ? OSM_VECTOR_STYLE : SATELLITE_STYLE}
                 onMove={handleMove}
                 attributionControl={false}
                 style={{ width: '100%', height: '100%' }}
@@ -202,7 +203,7 @@ export const MapSection: React.FC = () => {
         <Card.Footer>
           <Group justify="space-between" align="center">
             <Text size="xs" color="dimmed">
-              Controls: Click Compass to reset North &bull; Hold Right-Click / Ctrl to tilt & rotate &bull; Scroll to Zoom
+              Controls: Click Compass to reset North &bull; Drag Compass or hold Right-Click to tilt & rotate &bull; Scroll to Zoom
             </Text>
             <Button
               variant="outline"
@@ -210,7 +211,7 @@ export const MapSection: React.FC = () => {
               color="primary"
               onClick={toggleBasemap}
             >
-              Switch to {basemapType === 'vector' ? 'Satellite Imagery' : 'Vector Map'}
+              Switch to {basemapType === 'vector' ? 'Satellite Imagery' : 'OpenStreetMap Vector'}
             </Button>
           </Group>
         </Card.Footer>

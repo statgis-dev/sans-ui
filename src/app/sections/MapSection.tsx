@@ -118,10 +118,8 @@ export const MapSection: React.FC = () => {
   // Resolve current active MapLibre style
   const activeMapStyle =
     basemapMode === 'vector'
-      ? OSM_VECTOR_STYLE
-      : basemapMode === 'satellite'
-      ? SATELLITE_STYLE
-      : OSM_STANDARD_RASTER_STYLE;
+      ? OSM_STANDARD_RASTER_STYLE
+      : SATELLITE_STYLE;
 
   return (
     <Stack gap="lg">
@@ -142,8 +140,8 @@ export const MapSection: React.FC = () => {
                 {basemapMode === 'vector'
                   ? 'OSM VOYAGER VECTOR'
                   : basemapMode === 'satellite'
-                  ? 'ESRI SATELLITE'
-                  : 'OSM STANDARD RASTER'}
+                    ? 'ESRI SATELLITE'
+                    : 'OSM STANDARD RASTER'}
               </Badge>
               <Badge variant="light" color="neutral">
                 Zoom: {viewState.zoom.toFixed(1)}

@@ -1,0 +1,42 @@
+.shell {
+    height: 100vh;
+    min-height: 100vh;
+    background-color: var(--bg-app);
+    display: flex;
+    flex-direction: column;
+}
+
+.appbar {
+    position: sticky;
+    top: 0;
+    padding: 12px 24px;
+    z-index: var(--z-index-appbar, 100);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.appbar-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-between;
+}
+
+.main {
+    height: 100%;
+}
+
+.footer {
+    padding: 24px;
+    z-index: var(--z-index-appbar, 100);
+    border-top: 1px solid var(--border-strong);
+    background-color: var(--bg-muted);
+}
+
+.footer-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

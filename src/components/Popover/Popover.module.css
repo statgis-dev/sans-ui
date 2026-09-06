@@ -1,0 +1,73 @@
+.dropdown {
+  box-sizing: border-box;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  padding: var(--spacing-md);
+  z-index: var(--z-index-popover, 600);
+  animation: popoverEnter 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-width: calc(100vw - 16px);
+}
+
+@keyframes popoverEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Shadows */
+.shadowXs { box-shadow: var(--shadow-xs); }
+.shadowSm { box-shadow: var(--shadow-sm); }
+.shadowMd { box-shadow: var(--shadow-md); }
+.shadowLg { box-shadow: var(--shadow-lg); }
+.shadowXl { box-shadow: var(--shadow-xl); }
+
+/* Radii */
+.radiusNone { border-radius: var(--radius-none); }
+.radiusXs { border-radius: var(--radius-xs); }
+.radiusSm { border-radius: var(--radius-sm); }
+.radiusMd { border-radius: var(--radius-md); }
+.radiusLg { border-radius: var(--radius-lg); }
+.radiusXl { border-radius: var(--radius-xl); }
+.radiusFull { border-radius: var(--radius-full); }
+
+/* Arrow */
+.arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.arrowTop {
+  bottom: -6px;
+  border-top: none;
+  border-left: none;
+}
+
+.arrowBottom {
+  top: -6px;
+  border-bottom: none;
+  border-right: none;
+}
+
+.arrowLeft {
+  right: -6px;
+  border-bottom: none;
+  border-left: none;
+}
+
+.arrowRight {
+  left: -6px;
+  border-top: none;
+  border-right: none;
+}

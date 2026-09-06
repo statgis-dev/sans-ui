@@ -40,6 +40,7 @@ export * from './components/Card';
 
 // Overlays & Feedback
 export * from './components/Modal';
+export * from './components/Popover';
 export * from './components/Tooltip';
 export * from './components/Loader';
 

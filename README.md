@@ -874,6 +874,39 @@ Accessible dialog overlay rendered at `document.body` with backdrop blur, scroll
 
 ---
 
+#### `Popover`
+Accessible compound floating popover component (`Popover`, `Popover.Target`, `Popover.Dropdown`) supporting controlled and uncontrolled state, viewport collision detection, directional arrows, and portal-based rendering.
+
+```tsx
+<Popover position="bottom-start" shadow="md" withArrow>
+  <Popover.Target>
+    <Button>Toggle Settings</Button>
+  </Popover.Target>
+  <Popover.Dropdown>
+    <Stack gap="xs">
+      <Text size="sm" weight={600}>Popover Content</Text>
+      <Switch label="Enable notifications" />
+    </Stack>
+  </Popover.Dropdown>
+</Popover>
+```
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `opened` | `boolean` | — | Controlled visibility state |
+| `defaultOpened` | `boolean` | `false` | Uncontrolled initial visibility |
+| `onChange` | `(opened: boolean) => void` | — | Visibility change callback |
+| `position` | `'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'` | `'bottom-start'` | Preferred dropdown placement relative to target |
+| `offset` | `number` | `8` | Distance in pixels between target and dropdown |
+| `withArrow` | `boolean` | `false` | Displays 45°-rotated pointer arrow |
+| `closeOnClickOutside` | `boolean` | `true` | Dismisses when clicking outside the dropdown |
+| `closeOnEscape` | `boolean` | `true` | Dismisses on `Escape` key press |
+| `shadow` | `SizeScale` | `'md'` | Dropdown elevation box-shadow scale |
+| `radius` | `RadiusScale` | `'md'` | Dropdown border-radius scale |
+
+---
+
+
 #### `Tooltip`
 Floating contextual hint with directional arrows and hover/focus triggers.
 

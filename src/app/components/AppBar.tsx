@@ -7,10 +7,11 @@ import { Badge } from "@/components/Badge";
 import { useTheme } from "@/theme";
 import { IconButton } from "@/components/IconButton";
 import { Moon, Sun } from "lucide-react";
+import { useMediaQuery } from "usehooks-ts";
 
 export const AppBar: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
-
+    const isMobile = useMediaQuery("(max-width: 480px)");
 
     return (
         <div className="appbar">

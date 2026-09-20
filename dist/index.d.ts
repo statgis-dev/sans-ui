@@ -1,3 +1,4 @@
+import { Context } from 'react';
 import { CSSProperties } from 'react';
 import { DateRange } from 'react-day-picker';
 import { default as default_2 } from 'react';
@@ -351,6 +352,63 @@ export declare interface NumberInputProps extends UniversalProps, Omit<default_2
     onChange?: (value: number | undefined) => void;
 }
 
+export declare const Popover: PopoverComponent;
+
+export declare interface PopoverComponent extends default_2.FC<PopoverProps> {
+    Target: typeof PopoverTarget;
+    Dropdown: typeof PopoverDropdown;
+}
+
+export declare const PopoverContext: Context<PopoverContextValue | null>;
+
+export declare interface PopoverContextValue {
+    opened: boolean;
+    setOpened: (opened: boolean) => void;
+    toggle: () => void;
+    close: () => void;
+    open: () => void;
+    position: PopoverPosition;
+    offset: number;
+    withArrow: boolean;
+    closeOnClickOutside: boolean;
+    closeOnEscape: boolean;
+    shadow: SizeScale;
+    radius: RadiusScale;
+    targetRef: React.MutableRefObject<HTMLElement | null>;
+    dropdownRef: React.MutableRefObject<HTMLDivElement | null>;
+    popoverId: string;
+}
+
+export declare const PopoverDropdown: default_2.ForwardRefExoticComponent<PopoverDropdownProps & default_2.RefAttributes<HTMLDivElement>>;
+
+export declare interface PopoverDropdownProps extends UniversalProps, default_2.HTMLAttributes<HTMLDivElement> {
+    children?: default_2.ReactNode;
+}
+
+export declare type PopoverPosition = 'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end';
+
+export declare interface PopoverProps extends UniversalProps {
+    children: default_2.ReactNode;
+    opened?: boolean;
+    defaultOpened?: boolean;
+    onChange?: (opened: boolean) => void;
+    position?: PopoverPosition;
+    offset?: number;
+    withArrow?: boolean;
+    closeOnClickOutside?: boolean;
+    closeOnEscape?: boolean;
+    shadow?: SizeScale;
+    radius?: RadiusScale;
+    id?: string;
+}
+
+export declare const PopoverTarget: default_2.ForwardRefExoticComponent<Omit<PopoverTargetProps, "ref"> & default_2.RefAttributes<HTMLElement>>;
+
+export declare interface PopoverTargetProps {
+    children: default_2.ReactElement;
+    ref?: default_2.Ref<HTMLElement>;
+}
+
 export declare type RadiusPreset = 'sharp' | 'balanced' | 'rounded' | 'pill';
 
 export declare type RadiusScale = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
@@ -519,6 +577,8 @@ export declare interface UniversalProps {
     style?: CSSProperties;
     children?: ReactNode;
 }
+
+export declare function usePopoverContext(): PopoverContextValue;
 
 export declare function useTheme(): ThemeContextValue;
 

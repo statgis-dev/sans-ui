@@ -41,6 +41,10 @@ export default defineConfig({
         'react-map-gl',
         'react-map-gl/maplibre',
         'maplibre-gl',
+        'clsx',
+        'react-day-picker',
+        /^date-fns/,
+        /^lucide-react/,
       ],
       output: {
         globals: {

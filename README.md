@@ -2,6 +2,7 @@
 
 > A standalone, high-performance React UI component library engineered with strict TypeScript, modular CSS Modules, bundled local typography, and dynamic CSS custom property theming.
 
+[![npm](https://img.shields.io/npm/v/@statgis-dev/sans-ui.svg)](https://www.npmjs.com/package/@statgis-dev/sans-ui)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-^18.0.0-61dafb.svg)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-646cff.svg)](https://vitejs.dev/)
@@ -71,7 +72,7 @@
 
 ### Why sans-ui?
 - **Zero Runtime CSS Overhead**: Styled entirely via pure CSS Modules and standard CSS Custom Properties (`var(--...)`).
-- **Zero External Network Dependencies**: Local font files (`@fontsource/lato`, `@fontsource/poppins`, `@fontsource/jetbrains-mono`) are bundled directly into `sans-ui/style.css`.
+- **Zero External Network Dependencies**: Local font files (`@fontsource/lato`, `@fontsource/poppins`, `@fontsource/jetbrains-mono`) are bundled directly into `@statgis-dev/sans-ui/style.css`.
 - **Strict Accessibility & Ergonomics**: Built with ARIA semantics, WCAG-compliant contrast ratios, keyboard navigation (`Escape`, arrows, focus rings), and React 18 createPortal-based floating overlays that never clip inside parent overflow boundaries.
 - **Universal Polymorphism**: Primitives support the `as` prop (`div`, `span`, `section`, `article`, `p`, etc.) without sacrificing TypeScript autocompletion.
 
@@ -79,17 +80,17 @@
 
 ## Installation
 
-Install `sans-ui` and its peer dependencies using your preferred package manager:
+Install `@statgis-dev/sans-ui` and its peer dependencies using your preferred package manager:
 
 ```bash
 # npm
-npm install sans-ui react react-dom
+npm install @statgis-dev/sans-ui react react-dom
 
 # yarn
-yarn add sans-ui react react-dom
+yarn add @statgis-dev/sans-ui react react-dom
 
 # pnpm
-pnpm add sans-ui react react-dom
+pnpm add @statgis-dev/sans-ui react react-dom
 ```
 
 ---
@@ -100,7 +101,7 @@ pnpm add sans-ui react react-dom
 Import the unified style bundle once at the root entry of your project (e.g. `main.tsx` or `App.tsx`):
 
 ```tsx
-import 'sans-ui/style.css';
+import '@statgis-dev/sans-ui/style.css';
 ```
 
 ### 2. Wrap with `ThemeProvider`
@@ -109,8 +110,8 @@ Provide global theming context and automatic `data-theme` attribute management:
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ThemeProvider, Button, Title, Stack, Card } from 'sans-ui';
-import 'sans-ui/style.css';
+import { ThemeProvider, Button, Title, Stack, Card } from '@statgis-dev/sans-ui';
+import '@statgis-dev/sans-ui/style.css';
 
 function App() {
   return (
@@ -147,8 +148,8 @@ Wrap your application tree in `ThemeProvider` and pass a `config` object to cust
 
 ```tsx
 import React from 'react';
-import { ThemeProvider, type ThemeConfig } from 'sans-ui';
-import 'sans-ui/style.css';
+import { ThemeProvider, type ThemeConfig } from '@statgis-dev/sans-ui';
+import '@statgis-dev/sans-ui/style.css';
 
 const customTheme: ThemeConfig = {
   colors: {
@@ -291,7 +292,7 @@ export interface ThemeFonts {
 The `useTheme()` hook provides real-time getters and setters to update the design system dynamically without page reloads:
 
 ```tsx
-import { useTheme, Button, Group } from 'sans-ui';
+import { useTheme, Button, Group } from '@statgis-dev/sans-ui';
 
 function ThemeSettingsPanel() {
   const {
@@ -339,7 +340,7 @@ import {
   hslToHex,
   hexToRgb,
   rgbToHex,
-} from 'sans-ui';
+} from '@statgis-dev/sans-ui';
 
 // 1. Generate full 100-900 color ramp
 const ramp = generateColorRamp('#6366F1');
@@ -959,7 +960,7 @@ import {
   GeolocateControl,
   CompassControl,
   ZoomControlGroup,
-} from 'sans-ui';
+} from '@statgis-dev/sans-ui';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 function InteractiveMap() {
@@ -1076,6 +1077,25 @@ npm run typecheck
 # Build production library distribution bundle (dist/)
 npm run build
 ```
+
+---
+
+## Releasing
+
+Releases are published to npm automatically by GitHub Actions (`.github/workflows/release.yml`) using [Trusted Publishing (OIDC)](https://docs.npmjs.com/trusted-publishers) — no npm tokens are stored in the repository.
+
+To cut a new release:
+
+1. Bump the version and create a git tag:
+   ```bash
+   npm version patch   # or minor | major
+   git push --follow-tags
+   ```
+2. Create a **GitHub Release** from the pushed tag (`vX.Y.Z`). Publishing the release triggers the workflow.
+3. The workflow verifies the tag matches `package.json` `version`, then runs `npm ci`, `npm run build`, and `npm publish --provenance --access public`.
+4. Verify the new version and its provenance badge on [npmjs.com/package/@statgis-dev/sans-ui](https://www.npmjs.com/package/@statgis-dev/sans-ui).
+
+Every push to `main` and every pull request also runs the CI workflow (`.github/workflows/ci.yml`), which typechecks and builds the package and uploads `dist/` as a build artifact.
 
 ---
 

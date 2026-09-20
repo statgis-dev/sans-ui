@@ -1,7 +1,32 @@
 {
-  "name": "sans-ui",
+  "name": "@statgis-dev/sans-ui",
   "version": "0.1.0",
   "description": "Standalone, high-performance React UI component library based on strict TypeScript and CSS Modules",
+  "license": "MIT",
+  "author": "statgis-dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/statgis-dev/sans-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/statgis-dev/sans-ui/issues"
+  },
+  "homepage": "https://github.com/statgis-dev/sans-ui#readme",
+  "keywords": [
+    "react",
+    "ui",
+    "component-library",
+    "css-modules",
+    "design-system",
+    "typescript",
+    "maplibre"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -28,16 +53,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@fontsource/jetbrains-mono": "^5.0.21",
-    "@fontsource/lato": "^5.0.21",
-    "@fontsource/poppins": "^5.0.14",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "lucide-react": "^0.453.0",
@@ -47,7 +70,10 @@
   },
   "devDependencies": {
     "@fontsource/andada-pro": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.0.21",
+    "@fontsource/lato": "^5.0.21",
     "@fontsource/montserrat": "^5.3.0",
+    "@fontsource/poppins": "^5.0.14",
     "@fontsource/slabo-13px": "^5.3.0",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
@@ -59,6 +85,9 @@
     "usehooks-ts": "^3.1.1",
     "vite": "^5.4.8",
     "vite-plugin-dts": "^4.2.3"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "style": "./dist/style.css"
 }
